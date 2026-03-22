@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes } from "react";
+import { useId, type InputHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,7 +8,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ label, error, helperText, className, id, ...props }: InputProps) {
-  const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+  const autoId = useId();
+  const inputId = id || autoId;
+  const errorId = error ? `${inputId}-error` : undefined;
+  const helperId = helperText && !error ? `${inputId}-helper` : undefined;
+  const describedBy = errorId || helperId || undefined;
+
   return (
     <div className="flex flex-col gap-1">
       {label && (
@@ -21,6 +26,8 @@ export function Input({ label, error, helperText, className, id, ...props }: Inp
       )}
       <input
         id={inputId}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
         className={cn(
           "h-9 px-3 bg-surface-0 border rounded-sm",
           "text-sm text-text-primary placeholder:text-text-tertiary",
@@ -29,15 +36,16 @@ export function Input({ label, error, helperText, className, id, ...props }: Inp
           error
             ? "border-rose-400 focus:border-rose-400 focus:ring-rose-400/15"
             : "border-border-med focus:border-indigo-400 focus:ring-indigo-400/15",
+          "disabled:opacity-50 disabled:cursor-not-allowed",
           className,
         )}
         {...props}
       />
       {error && (
-        <p className="text-[11px] text-rose-600">{error}</p>
+        <p id={errorId} role="alert" className="text-[11px] text-rose-600">{error}</p>
       )}
       {helperText && !error && (
-        <p className="text-[11px] text-text-tertiary">{helperText}</p>
+        <p id={helperId} className="text-[11px] text-text-tertiary">{helperText}</p>
       )}
     </div>
   );

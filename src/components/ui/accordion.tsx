@@ -24,9 +24,14 @@ export function Accordion({ items, defaultOpen, className }: AccordionProps) {
     <div className={cn("divide-y divide-border-soft", className)}>
       {items.map((item) => {
         const isOpen = openId === item.id;
+        const contentId = `accordion-content-${item.id}`;
+        const triggerId = `accordion-trigger-${item.id}`;
         return (
           <div key={item.id}>
             <button
+              id={triggerId}
+              aria-expanded={isOpen}
+              aria-controls={contentId}
               onClick={() => setOpenId(isOpen ? null : item.id)}
               className="flex items-center justify-between w-full py-3 text-left text-sm font-medium text-text-primary hover:text-text-link transition-colors"
             >
@@ -34,6 +39,7 @@ export function Accordion({ items, defaultOpen, className }: AccordionProps) {
               <motion.span
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
+                aria-hidden="true"
               >
                 <ChevronDown size={14} strokeWidth={1.5} className="text-text-tertiary" />
               </motion.span>
@@ -41,6 +47,9 @@ export function Accordion({ items, defaultOpen, className }: AccordionProps) {
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
+                  id={contentId}
+                  role="region"
+                  aria-labelledby={triggerId}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}

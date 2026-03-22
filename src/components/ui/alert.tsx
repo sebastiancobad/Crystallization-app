@@ -48,6 +48,7 @@ export function Alert({ variant = "info", title, children, className }: AlertPro
 
   return (
     <div
+      role="alert"
       className={cn(
         "flex gap-3 rounded-md border p-4",
         config.bg,
@@ -55,7 +56,7 @@ export function Alert({ variant = "info", title, children, className }: AlertPro
         className,
       )}
     >
-      <Icon size={16} strokeWidth={1.5} className={cn("shrink-0 mt-0.5", config.iconColor)} />
+      <Icon size={16} strokeWidth={1.5} className={cn("shrink-0 mt-0.5", config.iconColor)} aria-hidden="true" />
       <div className="flex-1 min-w-0">
         {title && (
           <p className={cn("text-sm font-medium mb-0.5", config.titleColor)}>{title}</p>

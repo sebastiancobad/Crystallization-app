@@ -26,13 +26,15 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
 
       {pages.map((page, i) =>
         page === "..." ? (
-          <span key={`ellipsis-${i}`} className="h-8 w-8 flex items-center justify-center text-xs text-text-tertiary">
+          <span key={`ellipsis-${i}`} className="h-8 w-8 flex items-center justify-center text-xs text-text-tertiary" aria-hidden="true">
             ...
           </span>
         ) : (
           <button
             key={page}
             onClick={() => onPageChange?.(page as number)}
+            aria-label={`Page ${page}`}
+            aria-current={currentPage === page ? "page" : undefined}
             className={cn(
               "h-8 w-8 flex items-center justify-center rounded-sm text-sm transition-colors",
               currentPage === page

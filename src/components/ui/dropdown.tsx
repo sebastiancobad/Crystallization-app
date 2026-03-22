@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface DropdownItem {
@@ -20,7 +20,11 @@ interface DropdownProps {
 
 export function Dropdown({ trigger, items, align = "left", className }: DropdownProps) {
   const [open, setOpen] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const actionItems = items.filter((item) => !item.divider);
 
   useEffect(() => {
     if (!open) return;
@@ -33,11 +37,62 @@ export function Dropdown({ trigger, items, align = "left", className }: Dropdown
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!open) {
+        if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+          e.preventDefault();
+          setOpen(true);
+        }
+        return;
+      }
+
+      switch (e.key) {
+        case "Escape":
+          e.preventDefault();
+          setOpen(false);
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev + 1) % actionItems.length);
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev - 1 + actionItems.length) % actionItems.length);
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (focusedIndex >= 0 && focusedIndex < actionItems.length) {
+            actionItems[focusedIndex].onClick?.();
+            setOpen(false);
+          }
+          break;
+      }
+    },
+    [open, focusedIndex, actionItems],
+  );
+
+  useEffect(() => {
+    if (open && menuRef.current) {
+      const buttons = menuRef.current.querySelectorAll<HTMLButtonElement>('[role="menuitem"]');
+      buttons[focusedIndex]?.focus();
+    }
+  }, [focusedIndex, open]);
+
   return (
-    <div ref={ref} className={cn("relative inline-block", className)}>
-      <div onClick={() => setOpen(!open)}>{trigger}</div>
+    <div ref={ref} className={cn("relative inline-block", className)} onKeyDown={handleKeyDown}>
+      <div
+        onClick={() => { setOpen(!open); if (!open) setFocusedIndex(0); }}
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        {trigger}
+      </div>
       {open && (
         <div
+          ref={menuRef}
+          role="menu"
           className={cn(
             "absolute z-50 mt-1 min-w-[180px] py-1 bg-surface-0 border border-border-soft rounded-md shadow-lg",
             "animate-in fade-in-0 zoom-in-95",
@@ -46,10 +101,12 @@ export function Dropdown({ trigger, items, align = "left", className }: Dropdown
         >
           {items.map((item, i) =>
             item.divider ? (
-              <div key={i} className="h-px bg-border-soft my-1" />
+              <div key={i} className="h-px bg-border-soft my-1" role="separator" />
             ) : (
               <button
                 key={i}
+                role="menuitem"
+                tabIndex={-1}
                 onClick={() => {
                   item.onClick?.();
                   setOpen(false);
@@ -61,7 +118,7 @@ export function Dropdown({ trigger, items, align = "left", className }: Dropdown
                     : "text-text-primary hover:bg-surface-1",
                 )}
               >
-                {item.icon && <span className="shrink-0 [&>svg]:w-4 [&>svg]:h-4 text-text-tertiary">{item.icon}</span>}
+                {item.icon && <span className="shrink-0 [&>svg]:w-4 [&>svg]:h-4 text-text-tertiary" aria-hidden="true">{item.icon}</span>}
                 {item.label}
               </button>
             ),

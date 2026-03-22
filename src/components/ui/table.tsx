@@ -26,6 +26,7 @@ export function DataTable<T extends Record<string, unknown>>({
             {columns.map((col) => (
               <th
                 key={col.key}
+                scope="col"
                 className={`
                   px-4 py-3 text-[11px] font-medium uppercase tracking-[0.3px] text-text-tertiary
                   ${col.numeric ? "text-right" : "text-left"}
@@ -39,7 +40,7 @@ export function DataTable<T extends Record<string, unknown>>({
         <tbody>
           {data.map((row, i) => (
             <tr
-              key={i}
+              key={(row["id"] as string | number) ?? i}
               className="h-11 border-b border-border-soft hover:bg-surface-1 transition-colors duration-100"
             >
               {columns.map((col) => (

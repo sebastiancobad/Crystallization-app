@@ -21,15 +21,29 @@ export function Popover({ trigger, children, align = "left", className }: Popove
         setOpen(false);
       }
     }
+    function handleEscape(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
   }, [open]);
 
   return (
     <div ref={ref} className={cn("relative inline-block", className)}>
-      <div onClick={() => setOpen(!open)}>{trigger}</div>
+      <div
+        onClick={() => setOpen(!open)}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+      >
+        {trigger}
+      </div>
       {open && (
         <div
+          role="dialog"
           className={cn(
             "absolute z-50 mt-2 p-4 bg-surface-0 border border-border-soft rounded-lg shadow-lg",
             "animate-in fade-in-0 zoom-in-95",

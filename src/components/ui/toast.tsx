@@ -48,7 +48,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setToasts((prev) => [...prev, { id, variant, message, title }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 4000);
+    }, 5000);
   }, []);
 
   const removeToast = useCallback((id: string) => {
@@ -58,7 +58,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ toast: addToast }}>
       {children}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 w-[360px]">
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 w-[360px]" role="status" aria-live="polite" aria-atomic="false">
         <AnimatePresence>
           {toasts.map((t) => {
             const Icon = iconMap[t.variant];
@@ -76,13 +76,14 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                   styles.border,
                 )}
               >
-                <Icon size={16} strokeWidth={1.5} className={cn("shrink-0 mt-0.5", styles.iconColor)} />
+                <Icon size={16} strokeWidth={1.5} className={cn("shrink-0 mt-0.5", styles.iconColor)} aria-hidden="true" />
                 <div className="flex-1 min-w-0">
                   {t.title && <p className="text-sm font-medium text-text-primary">{t.title}</p>}
                   <p className="text-sm text-text-secondary">{t.message}</p>
                 </div>
                 <button
                   onClick={() => removeToast(t.id)}
+                  aria-label="Dismiss notification"
                   className="shrink-0 text-text-tertiary hover:text-text-primary transition-colors"
                 >
                   <X size={14} strokeWidth={1.5} />

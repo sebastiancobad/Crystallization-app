@@ -96,10 +96,10 @@ const tableColumns = [
 ];
 
 const tableData = [
-  { polymer: "Polyethylene (HDPE)", method: "DSC", tm: "134.2", tc: "118.5", crystallinity: "72.4" },
-  { polymer: "Polypropylene (iPP)", method: "WAXS", tm: "165.8", tc: "112.3", crystallinity: "58.1" },
-  { polymer: "PLA", method: "DSC", tm: "170.5", tc: "98.7", crystallinity: "42.3" },
-  { polymer: "PET", method: "SAXS", tm: "256.3", tc: "195.2", crystallinity: "35.6" },
+  { polymer: "Polyethylene (HDPE)", method: "DSC", tm: "132.0", tc: "115.3", crystallinity: "72.4" },
+  { polymer: "Polypropylene (iPP)", method: "WAXS", tm: "165.0", tc: "112.3", crystallinity: "58.1" },
+  { polymer: "PLA", method: "DSC", tm: "168.5", tc: "102.7", crystallinity: "42.3" },
+  { polymer: "PET", method: "SAXS", tm: "252.0", tc: "198.5", crystallinity: "35.6" },
   { polymer: "PCL", method: "DSC", tm: "60.1", tc: "32.4", crystallinity: "55.8" },
 ];
 
@@ -273,7 +273,7 @@ export default function ShowcasePage() {
             </div>
             <div className="grid grid-cols-4 gap-4 mt-4">
               <MetricCard label="Crystallinity" value="72.4%" subtext="Xc via DSC" />
-              <MetricCard label="Melting Point" value="134.2" subtext="Tm (C)" />
+              <MetricCard label="Melting Point" value="132.0" subtext="Tm (C)" />
               <MetricCard label="Samples" value="1,247" subtext="in database" />
               <MetricCard label="Lamellar" value="12.3" subtext="nm (SAXS)" />
             </div>
@@ -288,11 +288,11 @@ export default function ShowcasePage() {
                   <div className="grid grid-cols-3 gap-4">
                     <div>
                       <p className="text-[11px] text-text-tertiary uppercase tracking-wide">Tm</p>
-                      <p className="text-lg font-medium text-text-primary">134.2°C</p>
+                      <p className="text-lg font-medium text-text-primary">132.0°C</p>
                     </div>
                     <div>
                       <p className="text-[11px] text-text-tertiary uppercase tracking-wide">Tc</p>
-                      <p className="text-lg font-medium text-text-primary">118.5°C</p>
+                      <p className="text-lg font-medium text-text-primary">115.3°C</p>
                     </div>
                     <div>
                       <p className="text-[11px] text-text-tertiary uppercase tracking-wide">Xc</p>
@@ -675,17 +675,17 @@ export default function ShowcasePage() {
                   {
                     id: "avrami",
                     title: "Avrami Equation",
-                    content: "The Avrami equation describes the kinetics of phase transformation: X(t) = 1 - exp(-k·tⁿ), where k is the crystallization rate constant and n is the Avrami exponent related to nucleation and growth geometry.",
+                    content: "The Avrami equation describes isothermal crystallization kinetics: X(t) = 1 − exp(−Ktⁿ), where K is the overall crystallization rate constant and n (the Avrami exponent, typically 1–4) reflects nucleation type (sporadic vs predetermined) and growth dimensionality.",
                   },
                   {
                     id: "ozawa",
                     title: "Ozawa Analysis",
-                    content: "The Ozawa method extends the Avrami equation to non-isothermal conditions by incorporating cooling rate dependence: X(T) = 1 - exp(-K(T)/φᵐ), where φ is the cooling rate.",
+                    content: "The Ozawa method extends the Avrami analysis to non-isothermal conditions: 1 − X(T) = exp(−K(T)/φᵐ), where K(T) is the cooling function, φ is the cooling rate, and m is the Ozawa exponent. It assumes the non-isothermal process can be decomposed into infinitesimal isothermal steps.",
                   },
                   {
                     id: "lh",
                     title: "Lauritzen-Hoffman Theory",
-                    content: "L-H theory describes the temperature dependence of spherulite growth rate, distinguishing between regimes I, II, and III based on the relative rates of surface nucleation and substrate completion.",
+                    content: "Lauritzen–Hoffman theory models the temperature dependence of crystal (lamellar) growth rate G = G₀ exp(−U*/R(T−T∞)) exp(−Kᵍ/T·ΔT·f). Three kinetic regimes are defined: Regime I (single surface nucleus controls growth), Regime II (multiple nuclei compete with lateral spreading), and Regime III (prolific nucleation dominates).",
                   },
                 ]}
               />
@@ -818,10 +818,10 @@ export default function ShowcasePage() {
           <motion.div variants={fadeUp}>
             <SectionHeader title="Equation Block" />
             <EquationBlock
-              latex="G(T) = \Delta H_f \left(1 - \frac{T}{T_m^0}\right) - T \Delta S_{conf} + \gamma \cdot A"
+              latex="\Delta G = \Delta H_f^0 \left(1 - \frac{T}{T_m^0}\right) + 2 \sigma_e / \ell"
             />
             <EquationBlock
-              latex="X_c = \frac{\Delta H_m}{\Delta H_m^0} \times 100\%"
+              latex="X_c = \frac{\Delta H_m}{\Delta H_m^{100}} \times 100\%"
               className="mt-4"
             />
           </motion.div>

@@ -25,6 +25,12 @@ export function Toggle({ checked = false, onChange, label, disabled = false, cla
         aria-checked={checked}
         disabled={disabled}
         onClick={() => onChange?.(!checked)}
+        onKeyDown={(e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            onChange?.(!checked);
+          }
+        }}
         className={cn(
           "relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200",
           checked ? "bg-indigo-400" : "bg-surface-2",

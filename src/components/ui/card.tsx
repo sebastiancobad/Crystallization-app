@@ -12,7 +12,7 @@ export function Card({ children, className, interactive = false }: CardProps) {
     <div
       className={cn(
         "bg-surface-0 border border-border-soft rounded-md shadow-sm p-5",
-        interactive && "transition-all duration-200 ease-spring hover:shadow-md hover:-translate-y-px cursor-pointer",
+        interactive && "transition-all duration-200 hover:shadow-md hover:-translate-y-[1px] cursor-pointer",
         className,
       )}
       style={interactive ? undefined : { boxShadow: "var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.8)" }}

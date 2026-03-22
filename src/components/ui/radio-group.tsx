@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface RadioOption {
@@ -16,10 +17,28 @@ interface RadioGroupProps {
   className?: string;
 }
 
-export function RadioGroup({ options, value, onChange, className }: RadioGroupProps) {
+export function RadioGroup({ name, options, value, onChange, className }: RadioGroupProps) {
+  const groupRef = useRef<HTMLDivElement>(null);
+
+  function handleKeyDown(e: React.KeyboardEvent, index: number) {
+    let nextIndex: number | null = null;
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault();
+      nextIndex = (index + 1) % options.length;
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      nextIndex = (index - 1 + options.length) % options.length;
+    }
+    if (nextIndex !== null) {
+      onChange?.(options[nextIndex].value);
+      const buttons = groupRef.current?.querySelectorAll<HTMLButtonElement>('[role="radio"]');
+      buttons?.[nextIndex]?.focus();
+    }
+  }
+
   return (
-    <div className={cn("flex flex-col gap-2.5", className)} role="radiogroup">
-      {options.map((option) => {
+    <div ref={groupRef} className={cn("flex flex-col gap-2.5", className)} role="radiogroup" aria-label={name}>
+      {options.map((option, index) => {
         const isSelected = value === option.value;
         return (
           <label
@@ -30,7 +49,9 @@ export function RadioGroup({ options, value, onChange, className }: RadioGroupPr
               type="button"
               role="radio"
               aria-checked={isSelected}
+              tabIndex={isSelected || (value === undefined && index === 0) ? 0 : -1}
               onClick={() => onChange?.(option.value)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               className={cn(
                 "mt-0.5 h-4 w-4 rounded-full border-2 shrink-0 transition-all duration-150 flex items-center justify-center",
                 isSelected

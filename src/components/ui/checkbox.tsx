@@ -26,6 +26,12 @@ export function Checkbox({ checked = false, onChange, label, disabled = false, c
         aria-checked={checked}
         disabled={disabled}
         onClick={() => onChange?.(!checked)}
+        onKeyDown={(e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            onChange?.(!checked);
+          }
+        }}
         className={cn(
           "flex items-center justify-center h-4 w-4 rounded-sm border transition-all duration-150 shrink-0",
           checked

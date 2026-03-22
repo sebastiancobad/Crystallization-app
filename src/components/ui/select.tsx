@@ -1,4 +1,4 @@
-import type { SelectHTMLAttributes } from "react";
+import { useId, type SelectHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -9,7 +9,12 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export function Select({ label, error, helperText, options, className, id, ...props }: SelectProps) {
-  const selectId = id || label?.toLowerCase().replace(/\s+/g, "-");
+  const autoId = useId();
+  const selectId = id || autoId;
+  const errorId = error ? `${selectId}-error` : undefined;
+  const helperId = helperText && !error ? `${selectId}-helper` : undefined;
+  const describedBy = errorId || helperId || undefined;
+
   return (
     <div className="flex flex-col gap-1">
       {label && (
@@ -22,6 +27,8 @@ export function Select({ label, error, helperText, options, className, id, ...pr
       )}
       <select
         id={selectId}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
         className={cn(
           "h-9 px-3 bg-surface-0 border rounded-sm",
           "text-sm text-text-primary",
@@ -32,6 +39,7 @@ export function Select({ label, error, helperText, options, className, id, ...pr
           error
             ? "border-rose-400 focus:border-rose-400 focus:ring-rose-400/15"
             : "border-border-med focus:border-indigo-400 focus:ring-indigo-400/15",
+          "disabled:opacity-50 disabled:cursor-not-allowed",
           className,
         )}
         {...props}
@@ -42,8 +50,8 @@ export function Select({ label, error, helperText, options, className, id, ...pr
           </option>
         ))}
       </select>
-      {error && <p className="text-[11px] text-rose-600">{error}</p>}
-      {helperText && !error && <p className="text-[11px] text-text-tertiary">{helperText}</p>}
+      {error && <p id={errorId} role="alert" className="text-[11px] text-rose-600">{error}</p>}
+      {helperText && !error && <p id={helperId} className="text-[11px] text-text-tertiary">{helperText}</p>}
     </div>
   );
 }
