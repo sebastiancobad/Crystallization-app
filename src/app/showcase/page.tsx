@@ -19,6 +19,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Spinner } from "@/components/ui/spinner";
 import { Tooltip } from "@/components/ui/tooltip";
+import { Alert } from "@/components/ui/alert";
+import { Toggle } from "@/components/ui/toggle";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar } from "@/components/ui/avatar";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { Divider } from "@/components/ui/divider";
 import { fadeUp, stagger } from "@/lib/motion";
 import {
   CheckCircle,
@@ -387,6 +393,94 @@ export default function ShowcasePage() {
                   <span className="text-sm text-text-link underline decoration-dotted cursor-help">SSA</span>
                 </Tooltip>
               </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Alert ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Alerts" />
+            <div className="space-y-3">
+              <Alert variant="success" title="Analysis Complete">
+                DSC scan processed successfully. 3 thermal transitions detected.
+              </Alert>
+              <Alert variant="warning" title="Calibration Due">
+                SAXS detector calibration expires in 5 days.
+              </Alert>
+              <Alert variant="error" title="Processing Failed">
+                Insufficient data points for Avrami fit. Minimum 10 required.
+              </Alert>
+              <Alert variant="info">
+                New polymer entries can be added via the Database module.
+              </Alert>
+            </div>
+          </motion.div>
+
+          {/* ── Toggle & Checkbox ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Toggle & Checkbox" />
+            <Card>
+              <p className="text-xs font-medium text-text-secondary mb-3">Toggle Switches</p>
+              <div className="flex flex-col gap-3 mb-5">
+                <Toggle label="Auto-baseline correction" checked onChange={() => {}} />
+                <Toggle label="Show peak annotations" onChange={() => {}} />
+                <Toggle label="Disabled option" disabled />
+              </div>
+              <Divider />
+              <p className="text-xs font-medium text-text-secondary mb-3">Checkboxes</p>
+              <div className="flex flex-col gap-2.5">
+                <Checkbox label="Include melting temperature (Tm)" checked onChange={() => {}} />
+                <Checkbox label="Include crystallization temperature (Tc)" onChange={() => {}} />
+                <Checkbox label="Include degree of crystallinity (Xc)" checked onChange={() => {}} />
+                <Checkbox label="Disabled option" disabled />
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Avatar ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Avatars" />
+            <Card>
+              <div className="flex items-center gap-4 mb-4">
+                <Avatar name="Maria García" size="sm" />
+                <Avatar name="John Chen" size="md" />
+                <Avatar name="Anna Müller" size="lg" />
+                <Avatar name="Kenji Tanaka" size="md" />
+                <Avatar name="Sarah Johnson" size="md" />
+                <Avatar name="Pierre Dubois" size="md" />
+              </div>
+              <p className="text-xs text-text-tertiary">Deterministic colors based on name hash. Supports image fallback via src prop.</p>
+            </Card>
+          </motion.div>
+
+          {/* ── Breadcrumb ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Breadcrumb" />
+            <Card>
+              <div className="space-y-3">
+                <Breadcrumb items={[
+                  { label: "Dashboard", href: "/" },
+                  { label: "Database", href: "/database" },
+                  { label: "Polyethylene" },
+                ]} />
+                <Breadcrumb items={[
+                  { label: "Theory Hub", href: "/theory" },
+                  { label: "Kinetics", href: "/kinetics" },
+                  { label: "Avrami Analysis", href: "/kinetics/avrami" },
+                  { label: "Sample #1247" },
+                ]} />
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Divider ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Divider" />
+            <Card>
+              <p className="text-sm text-text-primary">Content above the divider</p>
+              <Divider />
+              <p className="text-sm text-text-primary">Content below a plain divider</p>
+              <Divider label="or" />
+              <p className="text-sm text-text-primary">Content below a labeled divider</p>
             </Card>
           </motion.div>
 
