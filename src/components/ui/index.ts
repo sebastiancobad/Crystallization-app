@@ -1,3 +1,4 @@
+export { Accordion } from "./accordion";
 export { Alert } from "./alert";
 export { Avatar } from "./avatar";
 export { Badge } from "./badge";
@@ -14,8 +15,10 @@ export { Input } from "./input";
 export { Kbd } from "./kbd";
 export { Modal } from "./modal";
 export { Pagination } from "./pagination";
+export { Popover } from "./popover";
 export { ProgressBar } from "./progress-bar";
 export { RadioGroup } from "./radio-group";
+export { SearchInput } from "./search-input";
 export { Select } from "./select";
 export { Sidebar } from "./sidebar";
 export { Skeleton } from "./skeleton";

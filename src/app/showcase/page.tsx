@@ -31,6 +31,9 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { Pagination } from "@/components/ui/pagination";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Kbd } from "@/components/ui/kbd";
+import { Accordion } from "@/components/ui/accordion";
+import { SearchInput } from "@/components/ui/search-input";
+import { Popover } from "@/components/ui/popover";
 import { fadeUp, stagger } from "@/lib/motion";
 import {
   CheckCircle,
@@ -42,6 +45,7 @@ import {
   Pencil,
   Trash2,
   FileX,
+  Settings,
 } from "lucide-react";
 
 const SimpleAreaChart = dynamic(
@@ -121,13 +125,49 @@ const barChartData = [
   { polymer: "PEEK", xc: 28.2 },
 ];
 
+/* ── Showcase sections ── */
+const sections = [
+  "Color Palette", "Typography", "Buttons", "Cards", "Form Controls",
+  "Badges & Tags", "Tabs", "Status Indicators", "Tooltip", "Alerts",
+  "Toggle & Checkbox", "Avatars", "Breadcrumb", "Divider", "Dropdown Menu",
+  "Toast Notifications", "Radio Group", "Pagination", "Empty State",
+  "Keyboard Shortcuts", "Accordion", "Search Input", "Popover",
+  "Data Table", "Charts", "Modal", "Upload Zone", "Equation Block",
+  "Loading States", "Surface Depth", "Shadow Scale",
+];
+
+function sectionId(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
+
 /* ── Section header component ── */
 function SectionHeader({ title }: { title: string }) {
   return (
-    <div className="flex items-center gap-3 mb-6 mt-12 first:mt-0">
+    <div id={sectionId(title)} className="flex items-center gap-3 mb-6 mt-12 first:mt-0 scroll-mt-20">
       <div className="w-0.5 h-5 bg-indigo-400 rounded-full" />
       <h2 className="text-xl font-medium text-text-primary">{title}</h2>
     </div>
+  );
+}
+
+/* ── Section navigation sidebar ── */
+function SectionNav() {
+  return (
+    <nav className="hidden xl:block fixed right-6 top-24 w-48 max-h-[calc(100vh-8rem)] overflow-y-auto">
+      <p className="text-[10px] uppercase tracking-widest text-text-tertiary font-medium mb-2">Sections</p>
+      <ul className="space-y-0.5">
+        {sections.map((s) => (
+          <li key={s}>
+            <a
+              href={`#${sectionId(s)}`}
+              className="block text-xs text-text-tertiary hover:text-text-primary py-0.5 transition-colors"
+            >
+              {s}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
@@ -139,6 +179,7 @@ export default function ShowcasePage() {
 
   return (
     <MainLayout title="Design System Showcase" subtitle="PolymerCryst v0.1">
+        <SectionNav />
         <motion.div
           variants={stagger}
           initial="initial"
@@ -620,6 +661,90 @@ export default function ShowcasePage() {
                   <span className="text-sm text-text-primary">Escape</span>
                   <Kbd>Esc</Kbd>
                 </div>
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Accordion ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Accordion" />
+            <Card>
+              <Accordion
+                defaultOpen="avrami"
+                items={[
+                  {
+                    id: "avrami",
+                    title: "Avrami Equation",
+                    content: "The Avrami equation describes the kinetics of phase transformation: X(t) = 1 - exp(-k·tⁿ), where k is the crystallization rate constant and n is the Avrami exponent related to nucleation and growth geometry.",
+                  },
+                  {
+                    id: "ozawa",
+                    title: "Ozawa Analysis",
+                    content: "The Ozawa method extends the Avrami equation to non-isothermal conditions by incorporating cooling rate dependence: X(T) = 1 - exp(-K(T)/φᵐ), where φ is the cooling rate.",
+                  },
+                  {
+                    id: "lh",
+                    title: "Lauritzen-Hoffman Theory",
+                    content: "L-H theory describes the temperature dependence of spherulite growth rate, distinguishing between regimes I, II, and III based on the relative rates of surface nucleation and substrate completion.",
+                  },
+                ]}
+              />
+            </Card>
+          </motion.div>
+
+          {/* ── Search Input ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Search Input" />
+            <Card>
+              <div className="max-w-sm space-y-3">
+                <SearchInput placeholder="Search polymers..." />
+                <SearchInput placeholder="Filter experiments..." disabled />
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Popover ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Popover" />
+            <Card>
+              <div className="flex gap-4">
+                <Popover
+                  trigger={
+                    <Button variant="secondary" size="sm">
+                      <Settings size={14} /> Settings
+                    </Button>
+                  }
+                >
+                  <div className="w-56 space-y-3">
+                    <p className="text-sm font-medium text-text-primary">Display Settings</p>
+                    <div className="space-y-2">
+                      <Toggle label="Show grid lines" checked onChange={() => {}} />
+                      <Toggle label="Auto-scale axes" onChange={() => {}} />
+                    </div>
+                  </div>
+                </Popover>
+                <Popover
+                  trigger={<Badge variant="indigo">3 filters</Badge>}
+                  align="center"
+                >
+                  <div className="w-48">
+                    <p className="text-xs font-medium text-text-primary mb-2">Active Filters</p>
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-text-secondary">Method</span>
+                        <Badge variant="sand">DSC</Badge>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-text-secondary">Polymer</span>
+                        <Badge variant="sage">HDPE</Badge>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-text-secondary">Year</span>
+                        <Badge variant="slate">2026</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </Popover>
               </div>
             </Card>
           </motion.div>
