@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PolymerCryst
+
+A research platform and design system for polymer crystallization studies. Built with Next.js 16, React 19, and Tailwind CSS v4.
+
+## Overview
+
+PolymerCryst provides a comprehensive UI toolkit tailored for polymer science research — from DSC thermal analysis to SAXS/WAXS structural characterization. The design system uses a soft, academic-inspired aesthetic with pastel color ramps and generous whitespace.
+
+### Live Preview
+
+Visit `/showcase` to see every component rendered with real polymer science data and equations.
+
+## Tech Stack
+
+- **Framework**: Next.js 16.2 (Turbopack)
+- **UI**: React 19, TypeScript 5
+- **Styling**: Tailwind CSS v4 with `@theme` design tokens
+- **Animation**: Framer Motion 12
+- **Charts**: Recharts 3
+- **Math**: KaTeX 0.16
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Run linter
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app, or [http://localhost:3000/showcase](http://localhost:3000/showcase) for the design system.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design System
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 37 Components
 
-## Learn More
+| Category | Components |
+|----------|-----------|
+| **Forms** | Input, Select, Textarea, Checkbox, Toggle, RadioGroup, SearchInput, Button |
+| **Feedback** | Alert, Modal, Toast, Tooltip, Spinner, ProgressBar, Skeleton, EmptyState |
+| **Data Display** | DataTable, Badge, Avatar, Card, MetricCard, FeatureCard, Kbd |
+| **Navigation** | Sidebar, Tabs, Breadcrumb, Dropdown, Pagination |
+| **Overlay** | Modal, Dropdown, Popover, Toast |
+| **Disclosure** | Accordion, Tabs |
+| **Layout** | MainLayout, Divider |
+| **Specialized** | EquationBlock (KaTeX), UploadZone, SimpleAreaChart, SimpleBarChart |
 
-To learn more about Next.js, take a look at the following resources:
+### Design Tokens
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Seven pastel color ramps defined via CSS custom properties in `@theme`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Indigo** — Primary actions, active states
+- **Sage** — Success, biopolymer tags
+- **Rose** — Error, destructive actions
+- **Sand** — Warning, SAXS/WAXS tags
+- **Slate** — Info, neutral states
+- **Teal** — Simulation, secondary highlights
+- **Lavender** — SSA module, tertiary accents
 
-## Deploy on Vercel
+Four semantic surfaces (`canvas`, `surface-0/1/2`), three border levels, and four shadow scales.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Accessibility
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All components follow WCAG 2.1 guidelines:
+
+- Proper ARIA roles and attributes (`role="dialog"`, `aria-expanded`, `aria-controls`, etc.)
+- Keyboard navigation (arrow keys for tabs/radio/dropdowns, Escape to dismiss, focus trapping in modals)
+- `aria-invalid` + `aria-describedby` on form controls with error states
+- `aria-current="page"` on active navigation items
+- `role="alert"` for error messages, `role="status"` for loading indicators
+
+### Motion
+
+Eight animation presets in `src/lib/motion.ts`:
+- `fadeUp`, `fadeIn`, `scaleIn`, `slideInRight`, `slideInLeft`
+- `stagger` (orchestration), `cardLift`, `scalePress` (interaction)
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css          # Tailwind v4 @theme tokens
+│   ├── layout.tsx           # Root layout with ToastProvider
+│   ├── page.tsx             # Landing page
+│   └── showcase/page.tsx    # Design system showcase
+├── components/
+│   ├── charts/              # Recharts wrappers
+│   ├── layout/              # MainLayout (sidebar + content)
+│   └── ui/                  # 37 UI components + barrel export
+└── lib/
+    ├── motion.ts            # Framer Motion presets
+    └── utils.ts             # cn() class merging utility
+```
+
+## Deploy
+
+### Vercel (Recommended)
+
+1. Import the repo at [vercel.com/new](https://vercel.com/new)
+2. Select the branch and click **Deploy**
+
+Or via CLI:
+
+```bash
+npx vercel --prod
+```
+
+## Scientific Context
+
+The showcase includes real polymer crystallization data:
+
+- **Equations**: Gibbs–Thomson free energy, DSC-based crystallinity (Xc), Avrami/Ozawa/Lauritzen–Hoffman kinetic models
+- **Sample data**: HDPE, iPP, PLA, PET, PCL with literature-accurate Tm, Tc, and Xc values
+- **Characterization methods**: DSC, SAXS, WAXS, SSA, PLM
+
+## License
+
+Private repository.
