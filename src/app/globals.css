@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Colors: Base Surfaces ── */
+  --color-canvas: #FAFAF9;
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #F5F4F2;
+  --color-surface-2: #EFEEEC;
+  --color-border-soft: rgba(0,0,0,0.06);
+  --color-border-med: rgba(0,0,0,0.10);
+  --color-border-hard: rgba(0,0,0,0.16);
+
+  /* ── Colors: Text ── */
+  --color-text-primary: #1A1917;
+  --color-text-secondary: #6B6860;
+  --color-text-tertiary: #A09D98;
+  --color-text-link: #3B5BDB;
+
+  /* ── Colors: Indigo (primary accent) ── */
+  --color-indigo-50: #F0F0FF;
+  --color-indigo-100: #E0E0FD;
+  --color-indigo-200: #C4C4F7;
+  --color-indigo-400: #8B8EE8;
+  --color-indigo-600: #5254A3;
+  --color-indigo-800: #333580;
+
+  /* ── Colors: Sage (biopolymers, SSA, organic) ── */
+  --color-sage-50: #F2F6F1;
+  --color-sage-100: #E2EDE0;
+  --color-sage-200: #C4DABC;
+  --color-sage-400: #82A876;
+  --color-sage-600: #4F7A44;
+  --color-sage-800: #2E4D27;
+
+  /* ── Colors: Dusty Rose (mechanical properties) ── */
+  --color-rose-50: #FDF2F4;
+  --color-rose-100: #F9E2E6;
+  --color-rose-200: #F0C2CB;
+  --color-rose-400: #D8829A;
+  --color-rose-600: #A3506A;
+  --color-rose-800: #6B2E42;
+
+  /* ── Colors: Sand Amber (SAXS/WAXS, thermal, DSC) ── */
+  --color-sand-50: #FAF7F0;
+  --color-sand-100: #F5EDD9;
+  --color-sand-200: #EAD4A8;
+  --color-sand-400: #C9A05A;
+  --color-sand-600: #957035;
+  --color-sand-800: #604618;
+
+  /* ── Colors: Slate Blue (theory, equations, kinetics) ── */
+  --color-slate-50: #F0F2F8;
+  --color-slate-100: #DEE3F2;
+  --color-slate-200: #BFCAE6;
+  --color-slate-400: #7D94CE;
+  --color-slate-600: #4A6BAD;
+  --color-slate-800: #2A4478;
+
+  /* ── Colors: Dusty Teal (tools, simulation) ── */
+  --color-teal-50: #F0F7F5;
+  --color-teal-100: #DAEEE9;
+  --color-teal-200: #AFDBD2;
+  --color-teal-400: #62B5A8;
+  --color-teal-600: #377D73;
+  --color-teal-800: #1C4E47;
+
+  /* ── Colors: Soft Lavender (researchers, networks) ── */
+  --color-lav-50: #F5F2FB;
+  --color-lav-100: #EAE3F7;
+  --color-lav-200: #D2C5F0;
+  --color-lav-400: #A48DD8;
+  --color-lav-600: #7258B0;
+  --color-lav-800: #483574;
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Border Radius ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+
+  /* ── Easing ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ── Animations ── */
+  --animate-shimmer: shimmer 1.6s ease infinite;
+}
+
+/* ── Base Styles ── */
+body {
+  background-color: #FAFAF9;
+  color: #1A1917;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02','cv03','cv04','cv11';
+}
+
+/* ── Equation Blocks ── */
+.eq-block {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-left: 3px solid #C9A05A;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+/* ── Scrollbar (webkit) ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.18); }
+
+/* ── Focus visible — keyboard nav only ── */
+:focus-visible {
+  outline: 2px solid #8B8EE8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Selection ── */
+::selection { background: #E0E0FD; color: #333580; }
+
+/* ── Shimmer animation ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
