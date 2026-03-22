@@ -4,12 +4,13 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { MainLayout } from "@/components/layout/main-layout";
-import { Card, FeatureCard, MetricCard } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, FeatureCard, MetricCard } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { Tabs } from "@/components/ui/tabs";
 import { DataTable } from "@/components/ui/table";
 import { Modal } from "@/components/ui/modal";
 import { UploadZone } from "@/components/ui/upload-zone";
@@ -215,6 +216,35 @@ export default function ShowcasePage() {
               <MetricCard label="Samples" value="1,247" subtext="in database" />
               <MetricCard label="Lamellar" value="12.3" subtext="nm (SAXS)" />
             </div>
+            <div className="mt-4">
+              <p className="text-xs font-medium text-text-secondary mb-3">Structured Card</p>
+              <Card className="p-0">
+                <CardHeader>
+                  <CardTitle>DSC Analysis Results</CardTitle>
+                  <CardDescription>Isothermal crystallization of HDPE at 120°C</CardDescription>
+                </CardHeader>
+                <CardContent className="px-5">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div>
+                      <p className="text-[11px] text-text-tertiary uppercase tracking-wide">Tm</p>
+                      <p className="text-lg font-medium text-text-primary">134.2°C</p>
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-text-tertiary uppercase tracking-wide">Tc</p>
+                      <p className="text-lg font-medium text-text-primary">118.5°C</p>
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-text-tertiary uppercase tracking-wide">Xc</p>
+                      <p className="text-lg font-medium text-text-primary">72.4%</p>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="secondary" size="sm">Export</Button>
+                  <Button variant="primary" size="sm">View Details</Button>
+                </CardFooter>
+              </Card>
+            </div>
           </motion.div>
 
           {/* ── Form Inputs ── */}
@@ -261,6 +291,56 @@ export default function ShowcasePage() {
                 <Badge variant="teal">Simulation</Badge>
                 <Badge variant="lav">SSA</Badge>
               </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Tabs ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Tabs" />
+            <Card>
+              <Tabs
+                tabs={[
+                  {
+                    id: "thermal",
+                    label: "Thermal",
+                    content: (
+                      <div className="space-y-2">
+                        <p className="text-sm text-text-primary">DSC, TGA, and DMA characterization data for semicrystalline polymers.</p>
+                        <div className="flex gap-2">
+                          <Badge variant="sand">DSC</Badge>
+                          <Badge variant="rose">DMA</Badge>
+                        </div>
+                      </div>
+                    ),
+                  },
+                  {
+                    id: "structural",
+                    label: "Structural",
+                    content: (
+                      <div className="space-y-2">
+                        <p className="text-sm text-text-primary">SAXS, WAXS, and microscopy results for lamellar and spherulitic structures.</p>
+                        <div className="flex gap-2">
+                          <Badge variant="slate">SAXS</Badge>
+                          <Badge variant="teal">WAXS</Badge>
+                        </div>
+                      </div>
+                    ),
+                  },
+                  {
+                    id: "kinetics",
+                    label: "Kinetics",
+                    content: (
+                      <div className="space-y-2">
+                        <p className="text-sm text-text-primary">Avrami, Ozawa, and Lauritzen-Hoffman kinetic modeling parameters.</p>
+                        <div className="flex gap-2">
+                          <Badge variant="indigo">Avrami</Badge>
+                          <Badge variant="lav">L-H</Badge>
+                        </div>
+                      </div>
+                    ),
+                  },
+                ]}
+              />
             </Card>
           </motion.div>
 

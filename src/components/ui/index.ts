@@ -1,9 +1,10 @@
 export { Button } from "./button";
-export { Card, FeatureCard, MetricCard } from "./card";
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, FeatureCard, MetricCard } from "./card";
 export { Input } from "./input";
 export { Select } from "./select";
 export { Textarea } from "./textarea";
 export { Badge } from "./badge";
+export { Tabs } from "./tabs";
 export { DataTable } from "./table";
 export { Modal } from "./modal";
 export { ProgressBar } from "./progress-bar";

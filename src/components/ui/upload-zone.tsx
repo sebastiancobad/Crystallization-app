@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback, type DragEvent } from "react";
+import { useState, useCallback, useRef, type DragEvent, type ChangeEvent } from "react";
 import { Upload } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface UploadZoneProps {
   onFiles?: (files: FileList) => void;
@@ -9,8 +10,9 @@ interface UploadZoneProps {
   className?: string;
 }
 
-export function UploadZone({ onFiles, accept, className = "" }: UploadZoneProps) {
+export function UploadZone({ onFiles, accept, className }: UploadZoneProps) {
   const [isDragOver, setIsDragOver] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = useCallback((e: DragEvent) => {
     e.preventDefault();
@@ -32,21 +34,42 @@ export function UploadZone({ onFiles, accept, className = "" }: UploadZoneProps)
     [onFiles]
   );
 
+  const handleClick = useCallback(() => {
+    inputRef.current?.click();
+  }, []);
+
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files.length > 0) {
+        onFiles?.(e.target.files);
+      }
+    },
+    [onFiles]
+  );
+
   return (
     <div
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`
-        flex flex-col items-center justify-center gap-2 p-8
-        rounded-md border-[1.5px] border-dashed transition-all duration-200
-        ${isDragOver
+      onClick={handleClick}
+      className={cn(
+        "flex flex-col items-center justify-center gap-2 p-8 cursor-pointer",
+        "rounded-md border-[1.5px] border-dashed transition-all duration-200",
+        isDragOver
           ? "border-indigo-400 bg-indigo-50"
-          : "border-[rgba(0,0,0,0.12)] bg-surface-1"
-        }
-        ${className}
-      `}
+          : "border-[rgba(0,0,0,0.12)] bg-surface-1 hover:border-indigo-200 hover:bg-indigo-50/30",
+        className,
+      )}
     >
+      <input
+        ref={inputRef}
+        type="file"
+        accept={accept}
+        onChange={handleChange}
+        className="hidden"
+        multiple
+      />
       <Upload
         size={24}
         strokeWidth={1.5}
