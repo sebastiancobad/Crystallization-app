@@ -430,76 +430,74 @@ export default function TheoryPage() {
                 ),
               },
               {
-                id: "extended",
-                label: "Extended Avrami",
+                id: "non-isothermal",
+                label: "Non-isothermal Methods",
                 content: (
                   <div className="space-y-4">
                     <p className="text-sm text-text-secondary leading-relaxed">
-                      The classical Avrami equation assumes constant conditions throughout crystallization.
-                      Several extended formulations address real-world deviations:
+                      Real polymer processing involves cooling at finite rates, not isothermal holds.
+                      These methods extend the Avrami framework to non-isothermal conditions.
                     </p>
 
                     <div>
-                      <h4 className="text-xs font-medium text-text-primary mb-2">Two-Stage Avrami (Secondary Crystallization)</h4>
+                      <h4 className="text-xs font-medium text-text-primary mb-2">Jeziorny Modification</h4>
                       <p className="text-xs text-text-secondary mb-2">
-                        Many polymers show a two-stage process: primary (rapid) and secondary (slow, perfection/infilling).
+                        Applies the Avrami equation to non-isothermal DSC data by treating each
+                        temperature interval as pseudo-isothermal. The rate constant k is corrected
+                        for the cooling rate ϕ:
                       </p>
-                      <EquationBlock latex="X(t) = X_p\!\left[1 - e^{-k_1 t^{n_1}}\right] + (1-X_p)\!\left[1 - e^{-k_2 t^{n_2}}\right]" />
+                      <EquationBlock latex="\ln k_c = \frac{\ln k}{\phi}" />
                       <p className="text-xs text-text-tertiary">
-                        X_p = fraction from primary crystallization, k₁/n₁ and k₂/n₂ are Avrami
-                        parameters for primary and secondary stages.
+                        k_c = corrected rate constant that allows comparison between different cooling rates.
+                        The Avrami exponent n is obtained from the double-log plot as usual, then k is
+                        corrected by dividing ln(k) by the cooling rate ϕ.
                       </p>
                     </div>
 
                     <Divider className="my-2" />
 
                     <div>
-                      <h4 className="text-xs font-medium text-text-primary mb-2">Tobin Modification</h4>
+                      <h4 className="text-xs font-medium text-text-primary mb-2">Ozawa Equation</h4>
                       <p className="text-xs text-text-secondary mb-2">
-                        Accounts for impingement of growing crystallites without the phantom nuclei assumption:
+                        Derived by extending Avrami theory to constant cooling rate conditions.
+                        At a given temperature T, varying the cooling rate ϕ:
                       </p>
-                      <EquationBlock latex="X(t) = \frac{k_T \, t^{n_T}}{1 + k_T \, t^{n_T}}" />
-                    </div>
-
-                    <Divider className="my-2" />
-
-                    <div>
-                      <h4 className="text-xs font-medium text-text-primary mb-2">Malkin Model</h4>
-                      <p className="text-xs text-text-secondary mb-2">
-                        Separates nucleation and growth contributions explicitly:
-                      </p>
-                      <EquationBlock latex="X(t) = 1 - \frac{C_0 + 1}{C_0 + \exp(C_1 \, t)}" />
+                      <EquationBlock latex="1 - X(T) = \exp\!\left(\frac{-K(T)}{\phi^m}\right)" />
+                      <EquationBlock latex="\ln\!\left[-\ln(1-X(T))\right] = \ln K(T) - m \ln \phi" />
                       <p className="text-xs text-text-tertiary">
-                        C₀ relates to the ratio of growth to nucleation rates, C₁ is the overall
-                        crystallization rate.
+                        K(T) = Ozawa crystallization function (temperature-dependent), m = Ozawa exponent.
+                        Plot ln[−ln(1−X)] vs ln(ϕ) at fixed T: slope = −m, intercept = ln K(T).
+                        Limitation: often fails for polymers where the mechanism changes with cooling rate.
                       </p>
                     </div>
 
                     <Divider className="my-2" />
 
                     <div>
-                      <h4 className="text-xs font-medium text-text-primary mb-2">Ozawa (Non-isothermal)</h4>
+                      <h4 className="text-xs font-medium text-text-primary mb-2">Mo Method (Liu et al.)</h4>
                       <p className="text-xs text-text-secondary mb-2">
-                        Extension of Avrami for constant cooling rate experiments:
+                        Combines Avrami and Ozawa by equating them at a given relative crystallinity X(t):
                       </p>
-                      <EquationBlock latex="X(T) = 1 - \exp\!\left(\frac{-K(T)}{\phi^m}\right)" />
+                      <EquationBlock latex="\ln \phi = F(T) - a \ln t" />
+                      <EquationBlock latex="F(T) = \frac{1}{m}\!\left[\ln K(T) - \ln k\right], \quad a = \frac{n}{m}" />
                       <p className="text-xs text-text-tertiary">
-                        K(T) = Ozawa crystallization function (temperature-dependent), ϕ = cooling rate (°C/min),
-                        m = Ozawa exponent. Valid only if crystallization mechanism doesn't change with cooling rate.
+                        F(T) = cooling rate needed to reach a given X in unit time. Higher F(T) = harder to crystallize.
+                        a = ratio of Avrami to Ozawa exponents. Plot ln(ϕ) vs ln(t) at fixed X: slope = −a, intercept = F(T).
                       </p>
                     </div>
 
                     <Divider className="my-2" />
 
                     <div>
-                      <h4 className="text-xs font-medium text-text-primary mb-2">Mo Method (Combined Avrami-Ozawa)</h4>
+                      <h4 className="text-xs font-medium text-text-primary mb-2">Nakamura Equation</h4>
                       <p className="text-xs text-text-secondary mb-2">
-                        Combines Avrami and Ozawa at a given relative crystallinity:
+                        Isokinetic model that extends Avrami for arbitrary temperature programs T(t):
                       </p>
-                      <EquationBlock latex="\ln \phi = \frac{1}{a}\ln K(T) - \frac{n}{a}\ln t = F(T) - b \ln t" />
+                      <EquationBlock latex="X(t) = 1 - \exp\!\left[-\left(\int_0^t K(T(\tau))\,d\tau\right)^n\right]" />
                       <p className="text-xs text-text-tertiary">
-                        F(T) = value of ln(ϕ) at unit crystallization time; higher F(T) means
-                        a faster cooling rate is needed to reach a given crystallinity, i.e., more difficult crystallization.
+                        K(T) = temperature-dependent rate function (determined from isothermal experiments).
+                        Assumes isokinetic conditions — the ratio of nucleation to growth rates is constant.
+                        Used in process simulation for injection molding and fiber spinning.
                       </p>
                     </div>
                   </div>

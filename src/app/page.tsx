@@ -265,7 +265,8 @@ const modules = [
   { icon: Layers, label: "SSA Module", href: "/ssa", desc: "Successive self-nucleation & annealing", color: "text-sage-400", bg: "bg-sage-50" },
   { icon: Activity, label: "SAXS / WAXS", href: "/saxs", desc: "X-ray scattering analysis", color: "text-sand-400", bg: "bg-sand-50" },
   { icon: BarChart2, label: "Kinetics", href: "/kinetics", desc: "Crystallization kinetics modeling", color: "text-slate-400", bg: "bg-slate-50" },
-  { icon: Sliders, label: "Simulation", href: "/simulation", desc: "Run crystallization simulations", color: "text-teal-400", bg: "bg-teal-50" },
+  { icon: Microscope, label: "Crystal Growth", href: "/crystal-growth", desc: "PLOM morphology & growth rates", color: "text-teal-400", bg: "bg-teal-50" },
+  { icon: Sliders, label: "Simulation", href: "/simulation", desc: "Run crystallization simulations", color: "text-lav-400", bg: "bg-lav-50" },
   { icon: Database, label: "Database", href: "/database", desc: "Polymer & experiment records", color: "text-rose-400", bg: "bg-rose-50" },
   { icon: Users, label: "Researchers", href: "/researchers", desc: "Teams & collaborators", color: "text-lav-400", bg: "bg-lav-50" },
 ];

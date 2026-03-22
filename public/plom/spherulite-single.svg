@@ -1,0 +1,60 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sph1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="30%" stop-color="#16213e"/>
+      <stop offset="60%" stop-color="#0f3460"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </defs>
+  <!-- dark background (crossed polars) -->
+  <rect width="400" height="400" fill="#0a0a14"/>
+  <!-- spherulite body -->
+  <circle cx="200" cy="200" r="160" fill="url(#sph1)" opacity="0.9"/>
+  <!-- radial fibrils -->
+  <g stroke="#4a6fa5" stroke-width="0.4" opacity="0.5">
+    <line x1="200" y1="200" x2="200" y2="40"/>
+    <line x1="200" y1="200" x2="200" y2="360"/>
+    <line x1="200" y1="200" x2="40" y2="200"/>
+    <line x1="200" y1="200" x2="360" y2="200"/>
+    <line x1="200" y1="200" x2="87" y2="87"/>
+    <line x1="200" y1="200" x2="313" y2="313"/>
+    <line x1="200" y1="200" x2="313" y2="87"/>
+    <line x1="200" y1="200" x2="87" y2="313"/>
+    <line x1="200" y1="200" x2="60" y2="140"/>
+    <line x1="200" y1="200" x2="340" y2="260"/>
+    <line x1="200" y1="200" x2="140" y2="60"/>
+    <line x1="200" y1="200" x2="260" y2="340"/>
+    <line x1="200" y1="200" x2="60" y2="260"/>
+    <line x1="200" y1="200" x2="340" y2="140"/>
+    <line x1="200" y1="200" x2="260" y2="60"/>
+    <line x1="200" y1="200" x2="140" y2="340"/>
+  </g>
+  <!-- Maltese cross: dark arms (extinction) -->
+  <g fill="#0a0a14" opacity="0.7">
+    <path d="M200,200 L185,40 L215,40 Z"/>
+    <path d="M200,200 L185,360 L215,360 Z"/>
+    <path d="M200,200 L40,185 L40,215 Z"/>
+    <path d="M200,200 L360,185 L360,215 Z"/>
+  </g>
+  <!-- bright quadrants (birefringent) -->
+  <g opacity="0.3">
+    <path d="M200,40 A160,160 0 0,1 360,200 L200,200 Z" fill="#4a6fa5"/>
+    <path d="M40,200 A160,160 0 0,1 200,360 L200,200 Z" fill="#4a6fa5"/>
+  </g>
+  <!-- concentric rings (banding) -->
+  <g fill="none" stroke="#6a8cbe" stroke-width="0.5" opacity="0.25">
+    <circle cx="200" cy="200" r="40"/>
+    <circle cx="200" cy="200" r="65"/>
+    <circle cx="200" cy="200" r="90"/>
+    <circle cx="200" cy="200" r="115"/>
+    <circle cx="200" cy="200" r="140"/>
+  </g>
+  <!-- center nucleus -->
+  <circle cx="200" cy="200" r="4" fill="#e0e0e0"/>
+</svg>

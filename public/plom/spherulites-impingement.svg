@@ -1,0 +1,70 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="s1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="50%" stop-color="#16213e"/>
+      <stop offset="100%" stop-color="#0a0a14"/>
+    </radialGradient>
+    <radialGradient id="s2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="50%" stop-color="#0f3460"/>
+      <stop offset="100%" stop-color="#0a0a14"/>
+    </radialGradient>
+    <clipPath id="clip-all">
+      <rect width="400" height="400"/>
+    </clipPath>
+  </defs>
+  <rect width="400" height="400" fill="#0a0a14"/>
+  <g clip-path="url(#clip-all)">
+    <!-- Spherulite 1 -->
+    <g>
+      <circle cx="130" cy="140" r="120" fill="url(#s1)" opacity="0.85"/>
+      <g fill="#0a0a14" opacity="0.6">
+        <path d="M130,140 L118,20 L142,20 Z"/>
+        <path d="M130,140 L118,260 L142,260 Z"/>
+        <path d="M130,140 L10,128 L10,152 Z"/>
+        <path d="M130,140 L250,128 L250,152 Z"/>
+      </g>
+      <g opacity="0.25">
+        <path d="M130,20 A120,120 0 0,1 250,140 L130,140 Z" fill="#4a6fa5"/>
+        <path d="M10,140 A120,120 0 0,1 130,260 L130,140 Z" fill="#4a6fa5"/>
+      </g>
+      <circle cx="130" cy="140" r="3" fill="#e0e0e0"/>
+    </g>
+    <!-- Spherulite 2 -->
+    <g>
+      <circle cx="280" cy="160" r="110" fill="url(#s2)" opacity="0.85"/>
+      <g fill="#0a0a14" opacity="0.6">
+        <path d="M280,160 L268,50 L292,50 Z"/>
+        <path d="M280,160 L268,270 L292,270 Z"/>
+        <path d="M280,160 L170,148 L170,172 Z"/>
+        <path d="M280,160 L390,148 L390,172 Z"/>
+      </g>
+      <g opacity="0.25">
+        <path d="M280,50 A110,110 0 0,1 390,160 L280,160 Z" fill="#5a7cad"/>
+        <path d="M170,160 A110,110 0 0,1 280,270 L280,160 Z" fill="#5a7cad"/>
+      </g>
+      <circle cx="280" cy="160" r="3" fill="#e0e0e0"/>
+    </g>
+    <!-- Spherulite 3 -->
+    <g>
+      <circle cx="180" cy="300" r="100" fill="url(#s1)" opacity="0.85"/>
+      <g fill="#0a0a14" opacity="0.6">
+        <path d="M180,300 L168,200 L192,200 Z"/>
+        <path d="M180,300 L168,400 L192,400 Z"/>
+        <path d="M180,300 L80,288 L80,312 Z"/>
+        <path d="M180,300 L280,288 L280,312 Z"/>
+      </g>
+      <g opacity="0.25">
+        <path d="M180,200 A100,100 0 0,1 280,300 L180,300 Z" fill="#4a6fa5"/>
+        <path d="M80,300 A100,100 0 0,1 180,400 L180,300 Z" fill="#4a6fa5"/>
+      </g>
+      <circle cx="180" cy="300" r="3" fill="#e0e0e0"/>
+    </g>
+    <!-- Impingement boundaries (bright lines where spherulites meet) -->
+    <g stroke="#7a9cc5" stroke-width="1.5" opacity="0.4" fill="none">
+      <line x1="200" y1="80" x2="210" y2="220"/>
+      <line x1="130" y1="220" x2="240" y2="240"/>
+    </g>
+  </g>
+</svg>

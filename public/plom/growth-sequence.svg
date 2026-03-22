@@ -1,0 +1,83 @@
+<svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="gs" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="50%" stop-color="#16213e"/>
+      <stop offset="100%" stop-color="#0a0a14"/>
+    </radialGradient>
+  </defs>
+  <!-- 4 time-lapse frames -->
+  <!-- Frame 1: t=0, small nucleus -->
+  <g>
+    <rect x="0" y="0" width="200" height="200" fill="#0a0a14"/>
+    <circle cx="100" cy="100" r="15" fill="url(#gs)" opacity="0.8"/>
+    <circle cx="100" cy="100" r="2" fill="#e0e0e0"/>
+    <text x="100" y="190" text-anchor="middle" fill="#6a8cbe" font-size="11" font-family="monospace">t = 0 min</text>
+  </g>
+  <!-- Frame 2: t=5, growing -->
+  <g>
+    <rect x="200" y="0" width="200" height="200" fill="#0a0a14"/>
+    <circle cx="300" cy="100" r="40" fill="url(#gs)" opacity="0.85"/>
+    <g fill="#0a0a14" opacity="0.5">
+      <path d="M300,100 L295,60 L305,60 Z"/>
+      <path d="M300,100 L295,140 L305,140 Z"/>
+      <path d="M300,100 L260,95 L260,105 Z"/>
+      <path d="M300,100 L340,95 L340,105 Z"/>
+    </g>
+    <g opacity="0.2">
+      <path d="M300,60 A40,40 0 0,1 340,100 L300,100 Z" fill="#4a6fa5"/>
+      <path d="M260,100 A40,40 0 0,1 300,140 L300,100 Z" fill="#4a6fa5"/>
+    </g>
+    <circle cx="300" cy="100" r="2" fill="#e0e0e0"/>
+    <text x="300" y="190" text-anchor="middle" fill="#6a8cbe" font-size="11" font-family="monospace">t = 5 min</text>
+  </g>
+  <!-- Frame 3: t=15, larger -->
+  <g>
+    <rect x="400" y="0" width="200" height="200" fill="#0a0a14"/>
+    <circle cx="500" cy="100" r="70" fill="url(#gs)" opacity="0.85"/>
+    <g fill="#0a0a14" opacity="0.6">
+      <path d="M500,100 L492,30 L508,30 Z"/>
+      <path d="M500,100 L492,170 L508,170 Z"/>
+      <path d="M500,100 L430,92 L430,108 Z"/>
+      <path d="M500,100 L570,92 L570,108 Z"/>
+    </g>
+    <g opacity="0.25">
+      <path d="M500,30 A70,70 0 0,1 570,100 L500,100 Z" fill="#4a6fa5"/>
+      <path d="M430,100 A70,70 0 0,1 500,170 L500,100 Z" fill="#4a6fa5"/>
+    </g>
+    <g fill="none" stroke="#6a8cbe" stroke-width="0.4" opacity="0.2">
+      <circle cx="500" cy="100" r="25"/>
+      <circle cx="500" cy="100" r="45"/>
+    </g>
+    <circle cx="500" cy="100" r="2" fill="#e0e0e0"/>
+    <text x="500" y="190" text-anchor="middle" fill="#6a8cbe" font-size="11" font-family="monospace">t = 15 min</text>
+  </g>
+  <!-- Frame 4: t=30, full size -->
+  <g>
+    <rect x="600" y="0" width="200" height="200" fill="#0a0a14"/>
+    <circle cx="700" cy="100" r="90" fill="url(#gs)" opacity="0.85"/>
+    <g fill="#0a0a14" opacity="0.65">
+      <path d="M700,100 L690,10 L710,10 Z"/>
+      <path d="M700,100 L690,190 L710,190 Z"/>
+      <path d="M700,100 L610,90 L610,110 Z"/>
+      <path d="M700,100 L790,90 L790,110 Z"/>
+    </g>
+    <g opacity="0.3">
+      <path d="M700,10 A90,90 0 0,1 790,100 L700,100 Z" fill="#4a6fa5"/>
+      <path d="M610,100 A90,90 0 0,1 700,190 L700,100 Z" fill="#4a6fa5"/>
+    </g>
+    <g fill="none" stroke="#6a8cbe" stroke-width="0.4" opacity="0.2">
+      <circle cx="700" cy="100" r="25"/>
+      <circle cx="700" cy="100" r="45"/>
+      <circle cx="700" cy="100" r="65"/>
+    </g>
+    <circle cx="700" cy="100" r="2" fill="#e0e0e0"/>
+    <text x="700" y="190" text-anchor="middle" fill="#6a8cbe" font-size="11" font-family="monospace">t = 30 min</text>
+  </g>
+  <!-- arrows between frames -->
+  <g fill="#6a8cbe" opacity="0.6">
+    <polygon points="190,100 196,95 196,105"/>
+    <polygon points="390,100 396,95 396,105"/>
+    <polygon points="590,100 596,95 596,105"/>
+  </g>
+</svg>

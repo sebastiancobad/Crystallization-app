@@ -8,6 +8,7 @@ import {
   Database,
   Users,
   BarChart2,
+  Microscope,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ const navGroups: NavGroup[] = [
       { icon: Layers, label: "SSA Module", href: "/ssa" },
       { icon: Activity, label: "SAXS / WAXS", href: "/saxs" },
       { icon: BarChart2, label: "Kinetics", href: "/kinetics" },
+      { icon: Microscope, label: "Crystal Growth", href: "/crystal-growth" },
     ],
   },
   {

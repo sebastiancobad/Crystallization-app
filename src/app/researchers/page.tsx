@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { Card, CardHeader, CardTitle, CardDescription, MetricCard } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { SearchInput } from "@/components/ui/search-input";
+import { Tabs } from "@/components/ui/tabs";
 
 const researchers = [
   {
@@ -74,6 +76,22 @@ const labs = [
 ];
 
 export default function ResearchersPage() {
+  const [search, setSearch] = useState("");
+
+  const q = search.toLowerCase();
+  const filteredResearchers = researchers.filter(
+    (r) =>
+      r.name.toLowerCase().includes(q) ||
+      r.role.toLowerCase().includes(q) ||
+      r.lab.toLowerCase().includes(q) ||
+      r.focus.toLowerCase().includes(q),
+  );
+  const filteredLabs = labs.filter(
+    (l) =>
+      l.name.toLowerCase().includes(q) ||
+      l.focus.toLowerCase().includes(q),
+  );
+
   return (
     <MainLayout title="Researchers" subtitle="Teams & collaborators">
       <div className="space-y-6">
@@ -85,60 +103,89 @@ export default function ResearchersPage() {
           <MetricCard label="Experiments" value="896" subtext="combined" />
         </div>
 
-        <SearchInput placeholder="Search researchers, labs..." className="max-w-sm" />
+        <SearchInput
+          placeholder="Search researchers, labs, focus areas..."
+          className="max-w-sm"
+          value={search}
+          onSearch={(v) => setSearch(v)}
+        />
 
-        {/* Researcher grid */}
-        <div>
-          <h2 className="text-sm font-medium text-text-primary mb-3">Team Members</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {researchers.map((r) => (
-              <Card key={r.name} interactive>
-                <div className="flex items-start gap-3">
-                  <Avatar name={r.name} size="lg" />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-text-primary truncate">{r.name}</span>
-                      <Badge variant={r.active ? "sage" : "slate"}>
-                        {r.active ? "active" : "away"}
-                      </Badge>
+        <Tabs
+          tabs={[
+            {
+              id: "team",
+              label: `Team Members (${filteredResearchers.length})`,
+              content: (
+                <div className="grid grid-cols-2 gap-4">
+                  {filteredResearchers.length === 0 ? (
+                    <div className="col-span-2 py-12 text-center">
+                      <p className="text-sm text-text-tertiary">
+                        No researchers match &quot;{search}&quot;
+                      </p>
                     </div>
-                    <p className="text-xs text-text-tertiary">{r.role} — {r.lab}</p>
-                    <p className="text-xs text-text-secondary mt-1">{r.focus}</p>
-                    <div className="flex items-center gap-4 mt-2 text-[10px] text-text-tertiary uppercase tracking-wider">
-                      <span>{r.experiments} experiments</span>
-                      <span>{r.publications} publications</span>
-                    </div>
+                  ) : (
+                    filteredResearchers.map((r) => (
+                      <Card key={r.name} interactive>
+                        <div className="flex items-start gap-3">
+                          <Avatar name={r.name} size="lg" />
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium text-text-primary truncate">{r.name}</span>
+                              <Badge variant={r.active ? "sage" : "slate"}>
+                                {r.active ? "active" : "away"}
+                              </Badge>
+                            </div>
+                            <p className="text-xs text-text-tertiary">{r.role} — {r.lab}</p>
+                            <p className="text-xs text-text-secondary mt-1">{r.focus}</p>
+                            <div className="flex items-center gap-4 mt-2 text-[10px] text-text-tertiary uppercase tracking-wider">
+                              <span>{r.experiments} experiments</span>
+                              <span>{r.publications} publications</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    ))
+                  )}
+                </div>
+              ),
+            },
+            {
+              id: "labs",
+              label: `Research Labs (${filteredLabs.length})`,
+              content: (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Research Labs</CardTitle>
+                    <CardDescription>Lab groups and their contributions</CardDescription>
+                  </CardHeader>
+                  <div className="space-y-4">
+                    {filteredLabs.length === 0 ? (
+                      <p className="text-sm text-text-tertiary py-8 text-center">
+                        No labs match &quot;{search}&quot;
+                      </p>
+                    ) : (
+                      filteredLabs.map((lab) => (
+                        <div key={lab.name} className="flex items-center gap-4">
+                          <div className="w-48">
+                            <span className="text-sm text-text-primary">{lab.name}</span>
+                            <p className="text-[10px] text-text-tertiary">{lab.focus}</p>
+                          </div>
+                          <Badge variant="indigo">{lab.members} members</Badge>
+                          <div className="flex-1">
+                            <ProgressBar value={Math.min(100, (lab.experiments / 320) * 100)} />
+                          </div>
+                          <span className="text-xs font-mono text-text-tertiary w-20 text-right">
+                            {lab.experiments} expts
+                          </span>
+                        </div>
+                      ))
+                    )}
                   </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Labs */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Research Labs</CardTitle>
-            <CardDescription>Lab groups and their contributions</CardDescription>
-          </CardHeader>
-          <div className="space-y-4">
-            {labs.map((lab) => (
-              <div key={lab.name} className="flex items-center gap-4">
-                <div className="w-48">
-                  <span className="text-sm text-text-primary">{lab.name}</span>
-                  <p className="text-[10px] text-text-tertiary">{lab.focus}</p>
-                </div>
-                <Badge variant="teal">{lab.members} members</Badge>
-                <div className="flex-1">
-                  <ProgressBar value={Math.min(100, (lab.experiments / 320) * 100)} />
-                </div>
-                <span className="text-xs font-mono text-text-tertiary w-20 text-right">
-                  {lab.experiments} expts
-                </span>
-              </div>
-            ))}
-          </div>
-        </Card>
+                </Card>
+              ),
+            },
+          ]}
+        />
       </div>
     </MainLayout>
   );
