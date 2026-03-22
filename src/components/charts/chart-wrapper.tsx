@@ -14,13 +14,13 @@ import {
 } from "recharts";
 
 export const chartColors = [
-  "#8B8EE8", // indigo-400
+  "#2EB5AD", // crystal-400
   "#82A876", // sage-400
   "#D8829A", // rose-400
   "#C9A05A", // sand-400
   "#7D94CE", // slate-400
   "#62B5A8", // teal-400
-  "#A48DD8", // lav-400
+  "#C4885A", // copper-400
 ];
 
 interface ChartWrapperProps {

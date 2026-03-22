@@ -60,18 +60,18 @@ const SimpleBarChart = dynamic(
 
 /* ── Color palette data ── */
 const colorRamps = [
-  { name: "Indigo", prefix: "indigo", stops: [50, 100, 200, 400, 600, 800] },
+  { name: "Crystal", prefix: "indigo", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Sage", prefix: "sage", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Rose", prefix: "rose", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Sand", prefix: "sand", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Slate", prefix: "slate", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Teal", prefix: "teal", stops: [50, 100, 200, 400, 600, 800] },
-  { name: "Lavender", prefix: "lav", stops: [50, 100, 200, 400, 600, 800] },
+  { name: "Copper", prefix: "lav", stops: [50, 100, 200, 400, 600, 800] },
 ];
 
 const colorMap: Record<string, string> = {
-  "indigo-50": "#F0F0FF", "indigo-100": "#E0E0FD", "indigo-200": "#C4C4F7",
-  "indigo-400": "#8B8EE8", "indigo-600": "#5254A3", "indigo-800": "#333580",
+  "indigo-50": "#EEFBFA", "indigo-100": "#D4F5F2", "indigo-200": "#A3E8E2",
+  "indigo-400": "#2EB5AD", "indigo-600": "#1A857F", "indigo-800": "#0E524E",
   "sage-50": "#F2F6F1", "sage-100": "#E2EDE0", "sage-200": "#C4DABC",
   "sage-400": "#82A876", "sage-600": "#4F7A44", "sage-800": "#2E4D27",
   "rose-50": "#FDF2F4", "rose-100": "#F9E2E6", "rose-200": "#F0C2CB",
@@ -82,8 +82,8 @@ const colorMap: Record<string, string> = {
   "slate-400": "#7D94CE", "slate-600": "#4A6BAD", "slate-800": "#2A4478",
   "teal-50": "#F0F7F5", "teal-100": "#DAEEE9", "teal-200": "#AFDBD2",
   "teal-400": "#62B5A8", "teal-600": "#377D73", "teal-800": "#1C4E47",
-  "lav-50": "#F5F2FB", "lav-100": "#EAE3F7", "lav-200": "#D2C5F0",
-  "lav-400": "#A48DD8", "lav-600": "#7258B0", "lav-800": "#483574",
+  "lav-50": "#FBF5F0", "lav-100": "#F5E6D8", "lav-200": "#E8C9AD",
+  "lav-400": "#C4885A", "lav-600": "#8F5E36", "lav-800": "#5A3A1F",
 };
 
 /* ── Sample table data ── */
