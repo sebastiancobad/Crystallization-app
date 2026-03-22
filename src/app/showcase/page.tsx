@@ -25,12 +25,23 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar } from "@/components/ui/avatar";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Divider } from "@/components/ui/divider";
+import { Dropdown } from "@/components/ui/dropdown";
+import { useToast } from "@/components/ui/toast";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { Pagination } from "@/components/ui/pagination";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Kbd } from "@/components/ui/kbd";
 import { fadeUp, stagger } from "@/lib/motion";
 import {
   CheckCircle,
   AlertTriangle,
   XCircle,
   Info,
+  MoreHorizontal,
+  Copy,
+  Pencil,
+  Trash2,
+  FileX,
 } from "lucide-react";
 
 const SimpleAreaChart = dynamic(
@@ -122,6 +133,9 @@ function SectionHeader({ title }: { title: string }) {
 
 export default function ShowcasePage() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [radioValue, setRadioValue] = useState("avrami");
+  const [currentPage, setCurrentPage] = useState(3);
+  const { toast } = useToast();
 
   return (
     <MainLayout title="Design System Showcase" subtitle="PolymerCryst v0.1">
@@ -481,6 +495,132 @@ export default function ShowcasePage() {
               <p className="text-sm text-text-primary">Content below a plain divider</p>
               <Divider label="or" />
               <p className="text-sm text-text-primary">Content below a labeled divider</p>
+            </Card>
+          </motion.div>
+
+          {/* ── Dropdown ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Dropdown Menu" />
+            <Card>
+              <div className="flex items-center gap-4">
+                <Dropdown
+                  trigger={
+                    <Button variant="secondary" size="sm">
+                      Actions <MoreHorizontal size={14} />
+                    </Button>
+                  }
+                  items={[
+                    { label: "Copy ID", icon: <Copy size={14} />, onClick: () => toast("info", "Copied to clipboard") },
+                    { label: "Edit Sample", icon: <Pencil size={14} /> },
+                    { divider: true, label: "" },
+                    { label: "Delete", icon: <Trash2 size={14} />, danger: true },
+                  ]}
+                />
+                <Dropdown
+                  trigger={
+                    <Button variant="ghost" size="sm">
+                      <MoreHorizontal size={16} />
+                    </Button>
+                  }
+                  items={[
+                    { label: "Export CSV" },
+                    { label: "Export JSON" },
+                    { label: "Print Report" },
+                  ]}
+                  align="right"
+                />
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Toast ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Toast Notifications" />
+            <Card>
+              <div className="flex flex-wrap gap-3">
+                <Button variant="secondary" size="sm" onClick={() => toast("success", "DSC scan processed successfully.", "Success")}>
+                  Success Toast
+                </Button>
+                <Button variant="secondary" size="sm" onClick={() => toast("warning", "Calibration expires in 5 days.")}>
+                  Warning Toast
+                </Button>
+                <Button variant="secondary" size="sm" onClick={() => toast("error", "Insufficient data points for Avrami fit.", "Error")}>
+                  Error Toast
+                </Button>
+                <Button variant="secondary" size="sm" onClick={() => toast("info", "New polymer entries can be added via Database.")}>
+                  Info Toast
+                </Button>
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Radio Group ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Radio Group" />
+            <Card>
+              <RadioGroup
+                name="kinetic-model"
+                value={radioValue}
+                onChange={setRadioValue}
+                options={[
+                  { value: "avrami", label: "Avrami Model", description: "Isothermal crystallization kinetics" },
+                  { value: "ozawa", label: "Ozawa Model", description: "Non-isothermal crystallization" },
+                  { value: "lh", label: "Lauritzen-Hoffman", description: "Spherulitic growth rate theory" },
+                ]}
+              />
+            </Card>
+          </motion.div>
+
+          {/* ── Pagination ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Pagination" />
+            <Card>
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-text-tertiary">Showing 21-30 of 124 results</p>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={13}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* ── Empty State ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Empty State" />
+            <Card>
+              <EmptyState
+                icon={<FileX strokeWidth={1.5} />}
+                title="No samples found"
+                description="Try adjusting your search filters or add a new polymer sample to get started."
+                action={<Button variant="primary" size="sm">Add Sample</Button>}
+              />
+            </Card>
+          </motion.div>
+
+          {/* ── Kbd ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Keyboard Shortcuts" />
+            <Card>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-text-primary">Search</span>
+                  <div className="flex items-center gap-1"><Kbd>Ctrl</Kbd><Kbd>K</Kbd></div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-text-primary">New experiment</span>
+                  <div className="flex items-center gap-1"><Kbd>Ctrl</Kbd><Kbd>N</Kbd></div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-text-primary">Save</span>
+                  <div className="flex items-center gap-1"><Kbd>Ctrl</Kbd><Kbd>S</Kbd></div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-text-primary">Escape</span>
+                  <Kbd>Esc</Kbd>
+                </div>
+              </div>
             </Card>
           </motion.div>
 
