@@ -61,11 +61,11 @@ const features = [
   },
 ];
 
-const stats = [
-  { value: "1,247", label: "Samples" },
-  { value: "54.3%", label: "Avg Crystallinity" },
-  { value: "24", label: "Researchers" },
-  { value: "8", label: "Active Studies" },
+const capabilities = [
+  { value: "7", label: "Modules" },
+  { value: "5+", label: "Kinetic Models" },
+  { value: "8", label: "Polymer Families" },
+  { value: "4", label: "Analysis Methods" },
 ];
 
 export default function IntroPage() {
@@ -143,17 +143,17 @@ export default function IntroPage() {
             </Button>
           </motion.div>
 
-          {/* Stats row */}
+          {/* Capabilities row */}
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.32 }}
             className="mt-16 grid grid-cols-4 gap-8 max-w-lg mx-auto"
           >
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-2xl font-semibold text-text-primary">{stat.value}</div>
+            {capabilities.map((cap) => (
+              <div key={cap.label} className="text-center">
+                <div className="text-2xl font-semibold text-text-primary">{cap.value}</div>
                 <div className="text-[11px] text-text-tertiary uppercase tracking-wider mt-1">
-                  {stat.label}
+                  {cap.label}
                 </div>
               </div>
             ))}
@@ -249,12 +249,26 @@ export default function IntroPage() {
 
 /* ── Dashboard view (after entering) ── */
 import { MainLayout } from "@/components/layout/main-layout";
-import { Card, MetricCard } from "@/components/ui/card";
-import { ProgressBar } from "@/components/ui/progress-bar";
+import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   Database,
-  TrendingUp,
+  BookOpen,
+  Activity,
+  Sliders,
+  Users,
+  FlaskConical,
 } from "lucide-react";
+
+const modules = [
+  { icon: BookOpen, label: "Theory Hub", href: "/theory", desc: "Crystallization fundamentals & equations", color: "text-indigo-400", bg: "bg-indigo-50" },
+  { icon: Layers, label: "SSA Module", href: "/ssa", desc: "Successive self-nucleation & annealing", color: "text-sage-400", bg: "bg-sage-50" },
+  { icon: Activity, label: "SAXS / WAXS", href: "/saxs", desc: "X-ray scattering analysis", color: "text-sand-400", bg: "bg-sand-50" },
+  { icon: BarChart2, label: "Kinetics", href: "/kinetics", desc: "Crystallization kinetics modeling", color: "text-slate-400", bg: "bg-slate-50" },
+  { icon: Sliders, label: "Simulation", href: "/simulation", desc: "Run crystallization simulations", color: "text-teal-400", bg: "bg-teal-50" },
+  { icon: Database, label: "Database", href: "/database", desc: "Polymer & experiment records", color: "text-rose-400", bg: "bg-rose-50" },
+  { icon: Users, label: "Researchers", href: "/researchers", desc: "Teams & collaborators", color: "text-lav-400", bg: "bg-lav-50" },
+];
 
 function DashboardView({ onBack }: { onBack: () => void }) {
   return (
@@ -265,24 +279,24 @@ function DashboardView({ onBack }: { onBack: () => void }) {
         transition={{ duration: 0.3 }}
         className="space-y-6"
       >
-        {/* Hero */}
+        {/* Welcome hero */}
         <div className="rounded-lg bg-gradient-to-br from-indigo-50 via-surface-0 to-teal-50 border border-border-soft p-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-medium text-text-primary mb-2">
-                Polymer Crystallization Platform
+                Welcome to PolymerCryst
               </h1>
               <p className="text-sm text-text-secondary max-w-xl mb-5">
-                Analyze crystallization kinetics, model spherulitic growth, and explore
-                structure-property relationships across polymer families.
+                Get started by exploring a module below. Browse crystallization theory,
+                run simulations, or check the polymer database.
               </p>
               <div className="flex gap-3">
-                <Button variant="primary">
-                  New Experiment
+                <Button variant="primary" href="/theory">
+                  Start with Theory
                   <ArrowRight size={14} strokeWidth={2} />
                 </Button>
                 <Button variant="secondary" href="/showcase">
-                  View Components
+                  Design System
                 </Button>
               </div>
             </div>
@@ -295,77 +309,43 @@ function DashboardView({ onBack }: { onBack: () => void }) {
           </div>
         </div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-4 gap-4">
-          <MetricCard label="Total Samples" value="1,247" subtext="+12 this week" />
-          <MetricCard label="Avg. Crystallinity" value="54.3%" subtext="across all polymers" />
-          <MetricCard label="Active Studies" value="8" subtext="3 in progress" />
-          <MetricCard label="Researchers" value="24" subtext="across 6 labs" />
-        </div>
-
-        {/* Quick Actions + Recent Activity */}
-        <div className="grid grid-cols-3 gap-4">
-          <Card className="col-span-2">
-            <h3 className="text-sm font-medium text-text-primary mb-4">Quick Actions</h3>
-            <div className="grid grid-cols-3 gap-3">
-              <button className="flex flex-col items-center gap-2 p-4 rounded-md bg-surface-1 hover:bg-surface-2 transition-colors">
-                <Beaker size={20} strokeWidth={1.5} className="text-indigo-400" />
-                <span className="text-xs font-medium text-text-primary">New DSC Run</span>
-              </button>
-              <button className="flex flex-col items-center gap-2 p-4 rounded-md bg-surface-1 hover:bg-surface-2 transition-colors">
-                <TrendingUp size={20} strokeWidth={1.5} className="text-sage-400" />
-                <span className="text-xs font-medium text-text-primary">Avrami Fit</span>
-              </button>
-              <button className="flex flex-col items-center gap-2 p-4 rounded-md bg-surface-1 hover:bg-surface-2 transition-colors">
-                <Database size={20} strokeWidth={1.5} className="text-teal-400" />
-                <span className="text-xs font-medium text-text-primary">Browse DB</span>
-              </button>
-            </div>
-          </Card>
-
-          <Card>
-            <h3 className="text-sm font-medium text-text-primary mb-4">Recent Activity</h3>
-            <div className="space-y-3">
-              {[
-                { label: "HDPE isothermal DSC", badge: "sage" as const, time: "2h ago" },
-                { label: "iPP WAXS analysis", badge: "sand" as const, time: "5h ago" },
-                { label: "PLA Avrami model", badge: "slate" as const, time: "1d ago" },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Badge variant={item.badge}>
-                      {item.badge === "sage" ? "DSC" : item.badge === "sand" ? "WAXS" : "Theory"}
-                    </Badge>
-                    <span className="text-xs text-text-primary">{item.label}</span>
+        {/* Module grid */}
+        <div>
+          <h2 className="text-sm font-medium text-text-primary mb-3">Modules</h2>
+          <div className="grid grid-cols-3 gap-3">
+            {modules.map((m) => {
+              const Icon = m.icon;
+              return (
+                <a
+                  key={m.label}
+                  href={m.href}
+                  className="flex items-start gap-3 p-4 rounded-md bg-surface-0 border border-border-soft hover:border-border-med hover:shadow-sm transition-all duration-150"
+                >
+                  <div className={`w-9 h-9 rounded-md ${m.bg} flex items-center justify-center shrink-0`}>
+                    <Icon size={18} strokeWidth={1.5} className={m.color} />
                   </div>
-                  <span className="text-[10px] text-text-tertiary">{item.time}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-
-        {/* Active Studies */}
-        <Card>
-          <h3 className="text-sm font-medium text-text-primary mb-4">Active Studies</h3>
-          <div className="space-y-4">
-            {[
-              { name: "HDPE Spherulite Growth Rate", progress: 72, method: "PLM" },
-              { name: "iPP SSA Fractionation", progress: 45, method: "DSC" },
-              { name: "PET Non-isothermal Kinetics", progress: 18, method: "DSC" },
-            ].map((study) => (
-              <div key={study.name}>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-text-primary">{study.name}</span>
-                    <Badge variant="indigo">{study.method}</Badge>
+                  <div>
+                    <span className="text-sm font-medium text-text-primary">{m.label}</span>
+                    <p className="text-xs text-text-secondary mt-0.5">{m.desc}</p>
                   </div>
-                  <span className="text-xs font-mono text-text-tertiary">{study.progress}%</span>
-                </div>
-                <ProgressBar value={study.progress} />
-              </div>
-            ))}
+                </a>
+              );
+            })}
           </div>
+        </div>
+
+        {/* Empty recent activity */}
+        <Card>
+          <EmptyState
+            icon={<FlaskConical strokeWidth={1.5} />}
+            title="No experiments yet"
+            description="Your recent activity and experiment results will appear here as you use the platform."
+            action={
+              <Button variant="secondary" size="sm" href="/simulation">
+                Run your first simulation
+              </Button>
+            }
+          />
         </Card>
       </motion.div>
     </MainLayout>
