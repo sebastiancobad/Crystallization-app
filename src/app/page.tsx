@@ -82,9 +82,9 @@ export default function IntroPage() {
 
       {/* Texture overlay — subtle crystalline noise */}
       <div
-        className="absolute inset-0 -z-[5] opacity-[0.03]"
+        className="absolute inset-0 -z-[5] opacity-[0.06]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230E524E' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g' width='20' height='20' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='10' cy='10' r='0.8' fill='%23152A72'/%3E%3C/pattern%3E%3Cpattern id='h' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23152A72' stroke-width='0.3' fill='none'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23g)'/%3E%3Crect width='100' height='100' fill='url(%23h)'/%3E%3C/svg%3E")`,
         }}
       />
 
@@ -100,7 +100,7 @@ export default function IntroPage() {
           className="text-center max-w-3xl mx-auto"
         >
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }}>
-            <Badge variant="teal" className="mb-6">
+            <Badge variant="indigo" className="mb-6">
               <Sparkles size={10} className="mr-1" />
               v0.1 — Research Preview
             </Badge>
@@ -113,7 +113,7 @@ export default function IntroPage() {
           >
             Polymer
             <br />
-            <span className="bg-gradient-to-r from-indigo-400 via-teal-400 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-400 via-slate-400 to-indigo-600 bg-clip-text text-transparent">
               Crystallization
             </span>
             <br />
@@ -280,7 +280,7 @@ function DashboardView({ onBack }: { onBack: () => void }) {
         className="space-y-6"
       >
         {/* Welcome hero */}
-        <div className="rounded-lg bg-gradient-to-br from-indigo-50 via-surface-0 to-teal-50 border border-border-soft p-8">
+        <div className="rounded-lg bg-gradient-to-br from-indigo-50 via-surface-0 to-slate-50 border border-border-soft p-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-medium text-text-primary mb-2">

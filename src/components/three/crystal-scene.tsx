@@ -40,7 +40,7 @@ function CrystalShard({
           distortionScale={0.2}
           temporalDistortion={0.1}
           ior={1.5}
-          color="#2EB5AD"
+          color="#4F6AE8"
           roughness={0.05}
           transmission={0.95}
         />
@@ -91,7 +91,7 @@ function Particles({ count = 120 }: { count?: number }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.04}
-        color="#62B5A8"
+        color="#7D94CE"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -139,7 +139,7 @@ function LatticeGrid() {
         const geom = new THREE.BufferGeometry().setFromPoints(seg);
         return (
           <lineSegments key={i} geometry={geom}>
-            <lineBasicMaterial color="#1A857F" transparent opacity={0.08} />
+            <lineBasicMaterial color="#2545B8" transparent opacity={0.08} />
           </lineSegments>
         );
       })}
@@ -165,8 +165,8 @@ function Scene() {
     <>
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} color="#ffffff" />
-      <directionalLight position={[-3, 2, -2]} intensity={0.3} color="#2EB5AD" />
-      <pointLight position={[0, 3, 2]} intensity={0.5} color="#62B5A8" />
+      <directionalLight position={[-3, 2, -2]} intensity={0.3} color="#4F6AE8" />
+      <pointLight position={[0, 3, 2]} intensity={0.5} color="#7D94CE" />
 
       {crystals.map((c, i) => (
         <CrystalShard key={i} {...c} />

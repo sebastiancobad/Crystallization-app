@@ -60,7 +60,7 @@ const SimpleBarChart = dynamic(
 
 /* ── Color palette data ── */
 const colorRamps = [
-  { name: "Crystal", prefix: "indigo", stops: [50, 100, 200, 400, 600, 800] },
+  { name: "Navy", prefix: "indigo", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Sage", prefix: "sage", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Rose", prefix: "rose", stops: [50, 100, 200, 400, 600, 800] },
   { name: "Sand", prefix: "sand", stops: [50, 100, 200, 400, 600, 800] },
@@ -70,8 +70,8 @@ const colorRamps = [
 ];
 
 const colorMap: Record<string, string> = {
-  "indigo-50": "#EEFBFA", "indigo-100": "#D4F5F2", "indigo-200": "#A3E8E2",
-  "indigo-400": "#2EB5AD", "indigo-600": "#1A857F", "indigo-800": "#0E524E",
+  "indigo-50": "#EEF2FF", "indigo-100": "#DBE1FE", "indigo-200": "#B8C4FC",
+  "indigo-400": "#4F6AE8", "indigo-600": "#2545B8", "indigo-800": "#152A72",
   "sage-50": "#F2F6F1", "sage-100": "#E2EDE0", "sage-200": "#C4DABC",
   "sage-400": "#82A876", "sage-600": "#4F7A44", "sage-800": "#2E4D27",
   "rose-50": "#FDF2F4", "rose-100": "#F9E2E6", "rose-200": "#F0C2CB",

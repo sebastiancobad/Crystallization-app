@@ -56,7 +56,7 @@ export default function SAXSPage() {
                     <CardTitle>Small-Angle X-ray Scattering</CardTitle>
                     <CardDescription>I(q) vs q — long-period peak from lamellar stacking</CardDescription>
                   </CardHeader>
-                  <SimpleAreaChart data={saxsProfile} xKey="q" yKey="intensity" color="#2EB5AD" height={260} />
+                  <SimpleAreaChart data={saxsProfile} xKey="q" yKey="intensity" color="#4F6AE8" height={260} />
                   <div className="mt-4">
                     <EquationBlock latex="L = \frac{2\pi}{q^*}" />
                   </div>
