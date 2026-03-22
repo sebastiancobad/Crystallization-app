@@ -69,7 +69,7 @@ export default function SimulationPage() {
                           step="0.1"
                           value={n}
                           onChange={(e) => { setN(+e.target.value); setHasRun(true); }}
-                          className="w-full accent-[#4F6AE8]"
+                          className="w-full accent-[#1B3A6B]"
                         />
                         <div className="flex justify-between text-[10px] text-text-tertiary mt-1">
                           <span>1 (1D)</span>
@@ -90,7 +90,7 @@ export default function SimulationPage() {
                           step="0.1"
                           value={logK}
                           onChange={(e) => { setLogK(+e.target.value); setHasRun(true); }}
-                          className="w-full accent-[#4F6AE8]"
+                          className="w-full accent-[#1B3A6B]"
                         />
                         <div className="flex justify-between text-[10px] text-text-tertiary mt-1">
                           <span>-4 (slow)</span>
@@ -143,7 +143,7 @@ export default function SimulationPage() {
                       data={curveData}
                       xKey="time"
                       yKey="crystallinity"
-                      color="#4F6AE8"
+                      color="#1B3A6B"
                       height={300}
                     />
                     <div className="mt-4 grid grid-cols-4 gap-3">

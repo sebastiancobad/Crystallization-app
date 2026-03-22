@@ -201,14 +201,14 @@ export default function SSAPage() {
                         <CardTitle>Standard DSC (single peak)</CardTitle>
                         <CardDescription>Broad melting endotherm — hides crystal distribution</CardDescription>
                       </CardHeader>
-                      <SimpleAreaChart data={standardDscCurve} xKey="temp" yKey="heatFlow" color="#7D94CE" height={200} />
+                      <SimpleAreaChart data={standardDscCurve} xKey="temp" yKey="heatFlow" color="#3B6298" height={200} />
                     </Card>
                     <Card>
                       <CardHeader>
                         <CardTitle>After SSA (multiple peaks)</CardTitle>
                         <CardDescription>Each peak = one crystal population with distinct lamellar thickness</CardDescription>
                       </CardHeader>
-                      <SimpleAreaChart data={ssaHeatingCurve} xKey="temp" yKey="heatFlow" color="#4F6AE8" height={200} />
+                      <SimpleAreaChart data={ssaHeatingCurve} xKey="temp" yKey="heatFlow" color="#1B3A6B" height={200} />
                     </Card>
                   </div>
 

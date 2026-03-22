@@ -16,13 +16,13 @@
   --color-text-tertiary: #A09D98;
   --color-text-link: #3B5BDB;
 
-  /* ── Colors: Navy (primary accent — deep blue) ── */
-  --color-indigo-50: #EEF2FF;
-  --color-indigo-100: #DBE1FE;
-  --color-indigo-200: #B8C4FC;
-  --color-indigo-400: #4F6AE8;
-  --color-indigo-600: #2545B8;
-  --color-indigo-800: #152A72;
+  /* ── Colors: Navy (primary accent — dark navy) ── */
+  --color-indigo-50: #EDF1F7;
+  --color-indigo-100: #D5DEEC;
+  --color-indigo-200: #A6BAD4;
+  --color-indigo-400: #1B3A6B;
+  --color-indigo-600: #122850;
+  --color-indigo-800: #0A1A38;
 
   /* ── Colors: Sage (biopolymers, SSA, organic) ── */
   --color-sage-50: #F2F6F1;
@@ -126,13 +126,13 @@ body {
 
 /* ── Focus visible — keyboard nav only ── */
 :focus-visible {
-  outline: 2px solid #4F6AE8;
+  outline: 2px solid #1B3A6B;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 /* ── Selection ── */
-::selection { background: #DBE1FE; color: #152A72; }
+::selection { background: #D5DEEC; color: #0A1A38; }
 
 /* ── Shimmer animation ── */
 @keyframes shimmer {

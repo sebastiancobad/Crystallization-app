@@ -112,7 +112,7 @@ export default function KineticsPage() {
                       Each curve is fitted independently with the Avrami equation.
                     </CardDescription>
                   </CardHeader>
-                  <SimpleAreaChart data={isothermCurves} xKey="time" yKey="Tc=120°C" color="#4F6AE8" height={280} />
+                  <SimpleAreaChart data={isothermCurves} xKey="time" yKey="Tc=120°C" color="#1B3A6B" height={280} />
                   <p className="text-xs text-text-tertiary mt-3">
                     X-axis: time (min). Y-axis: X(t) (%). The inflection point ≈ t₁/₂.
                     At Tc = 120°C: t₁/₂ ≈ 9 min, n ≈ 2.8 (3D spherulitic growth, athermal nucleation).
@@ -132,7 +132,7 @@ export default function KineticsPage() {
                       and chain mobility (↓ at low Tc). Maximum G occurs ~midway between Tg and Tm.
                     </CardDescription>
                   </CardHeader>
-                  <SimpleBarChart data={growthRateData} xKey="Tc" yKey="G" color="#7D94CE" height={280} />
+                  <SimpleBarChart data={growthRateData} xKey="Tc" yKey="G" color="#3B6298" height={280} />
                   <div className="mt-4 grid grid-cols-3 gap-3">
                     <div className="bg-surface-1 rounded-sm p-3">
                       <div className="text-[10px] uppercase tracking-wider text-text-tertiary">Peak Tc</div>

@@ -14,7 +14,7 @@ import {
 } from "recharts";
 
 export const chartColors = [
-  "#4F6AE8", // navy-400
+  "#1B3A6B", // navy-400
   "#82A876", // sage-400
   "#D8829A", // rose-400
   "#C9A05A", // sand-400
