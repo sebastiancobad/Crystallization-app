@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Card, FeatureCard, MetricCard } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { DataTable } from "@/components/ui/table";
 import { Modal } from "@/components/ui/modal";
@@ -13,6 +16,8 @@ import { UploadZone } from "@/components/ui/upload-zone";
 import { EquationBlock } from "@/components/ui/equation-block";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ProgressBar } from "@/components/ui/progress-bar";
+import { Spinner } from "@/components/ui/spinner";
+import { Tooltip } from "@/components/ui/tooltip";
 import { fadeUp, stagger } from "@/lib/motion";
 import {
   CheckCircle,
@@ -20,6 +25,16 @@ import {
   XCircle,
   Info,
 } from "lucide-react";
+
+const SimpleAreaChart = dynamic(
+  () => import("@/components/charts/chart-wrapper").then((m) => m.SimpleAreaChart),
+  { ssr: false }
+);
+
+const SimpleBarChart = dynamic(
+  () => import("@/components/charts/chart-wrapper").then((m) => m.SimpleBarChart),
+  { ssr: false }
+);
 
 /* ── Color palette data ── */
 const colorRamps = [
@@ -64,6 +79,28 @@ const tableData = [
   { polymer: "PLA", method: "DSC", tm: "170.5", tc: "98.7", crystallinity: "42.3" },
   { polymer: "PET", method: "SAXS", tm: "256.3", tc: "195.2", crystallinity: "35.6" },
   { polymer: "PCL", method: "DSC", tm: "60.1", tc: "32.4", crystallinity: "55.8" },
+];
+
+/* ── Sample chart data ── */
+const areaChartData = [
+  { time: "0", crystallinity: 0 },
+  { time: "5", crystallinity: 8 },
+  { time: "10", crystallinity: 22 },
+  { time: "15", crystallinity: 41 },
+  { time: "20", crystallinity: 58 },
+  { time: "25", crystallinity: 67 },
+  { time: "30", crystallinity: 71 },
+  { time: "35", crystallinity: 72 },
+  { time: "40", crystallinity: 72.4 },
+];
+
+const barChartData = [
+  { polymer: "HDPE", xc: 72.4 },
+  { polymer: "iPP", xc: 58.1 },
+  { polymer: "PCL", xc: 55.8 },
+  { polymer: "PLA", xc: 42.3 },
+  { polymer: "PET", xc: 35.6 },
+  { polymer: "PEEK", xc: 28.2 },
 ];
 
 /* ── Section header component ── */
@@ -179,12 +216,27 @@ export default function ShowcasePage() {
 
           {/* ── Form Inputs ── */}
           <motion.div variants={fadeUp}>
-            <SectionHeader title="Form Inputs" />
+            <SectionHeader title="Form Controls" />
             <Card>
               <div className="grid grid-cols-3 gap-4">
                 <Input label="Polymer Name" placeholder="e.g. Polyethylene" />
                 <Input label="Molecular Weight" placeholder="Mw (g/mol)" type="number" />
-                <Input label="Temperature" placeholder="e.g. 25" type="number" />
+                <Select
+                  label="Characterization Method"
+                  options={[
+                    { value: "dsc", label: "DSC" },
+                    { value: "saxs", label: "SAXS" },
+                    { value: "waxs", label: "WAXS" },
+                    { value: "plm", label: "PLM" },
+                  ]}
+                />
+              </div>
+              <div className="mt-4">
+                <Textarea
+                  label="Notes"
+                  placeholder="Describe sample preparation, experimental conditions..."
+                  rows={3}
+                />
               </div>
             </Card>
           </motion.div>
@@ -230,12 +282,60 @@ export default function ShowcasePage() {
             </Card>
           </motion.div>
 
+          {/* ── Tooltip ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Tooltip" />
+            <Card>
+              <div className="flex items-center gap-6">
+                <Tooltip content="Differential Scanning Calorimetry">
+                  <span className="text-sm text-text-link underline decoration-dotted cursor-help">DSC</span>
+                </Tooltip>
+                <Tooltip content="Small-Angle X-ray Scattering">
+                  <span className="text-sm text-text-link underline decoration-dotted cursor-help">SAXS</span>
+                </Tooltip>
+                <Tooltip content="Wide-Angle X-ray Scattering">
+                  <span className="text-sm text-text-link underline decoration-dotted cursor-help">WAXS</span>
+                </Tooltip>
+                <Tooltip content="Successive Self-nucleation and Annealing">
+                  <span className="text-sm text-text-link underline decoration-dotted cursor-help">SSA</span>
+                </Tooltip>
+              </div>
+            </Card>
+          </motion.div>
+
           {/* ── Table ── */}
           <motion.div variants={fadeUp}>
             <SectionHeader title="Data Table" />
             <Card className="p-0 overflow-hidden">
               <DataTable columns={tableColumns} data={tableData} />
             </Card>
+          </motion.div>
+
+          {/* ── Charts ── */}
+          <motion.div variants={fadeUp}>
+            <SectionHeader title="Charts" />
+            <div className="grid grid-cols-2 gap-4">
+              <Card>
+                <p className="text-xs font-medium text-text-secondary mb-3">Crystallization Kinetics — Xc vs Time</p>
+                <SimpleAreaChart
+                  data={areaChartData}
+                  xKey="time"
+                  yKey="crystallinity"
+                  color="#8B8EE8"
+                  height={200}
+                />
+              </Card>
+              <Card>
+                <p className="text-xs font-medium text-text-secondary mb-3">Crystallinity by Polymer</p>
+                <SimpleBarChart
+                  data={barChartData}
+                  xKey="polymer"
+                  yKey="xc"
+                  color="#82A876"
+                  height={200}
+                />
+              </Card>
+            </div>
           </motion.div>
 
           {/* ── Modal ── */}
@@ -285,6 +385,14 @@ export default function ShowcasePage() {
             <SectionHeader title="Loading States" />
             <Card>
               <div className="space-y-4">
+                <div>
+                  <p className="text-xs font-medium text-text-secondary mb-2">Spinner</p>
+                  <div className="flex items-center gap-4">
+                    <Spinner size={16} className="text-indigo-400" />
+                    <Spinner size={20} className="text-indigo-400" />
+                    <Spinner size={28} className="text-indigo-400" />
+                  </div>
+                </div>
                 <div>
                   <p className="text-xs font-medium text-text-secondary mb-2">Skeleton</p>
                   <div className="space-y-2">
