@@ -66,8 +66,8 @@ function SidebarNavItem({ item }: { item: NavItem }) {
 export function Sidebar() {
   return (
     <aside className="w-[220px] h-screen bg-surface-0 border-r border-border-soft flex flex-col shrink-0">
-      {/* Logo area */}
-      <div className="h-[60px] flex items-center gap-2 px-2.5">
+      {/* Logo — links to home */}
+      <a href="/" className="h-[60px] flex items-center gap-2 px-2.5 hover:bg-surface-1 transition-colors">
         <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
           <svg
             width="16"
@@ -89,7 +89,7 @@ export function Sidebar() {
         <span className="text-[15px] font-medium tracking-[-0.3px] text-text-primary">
           PolymerCryst
         </span>
-      </div>
+      </a>
 
       {/* Navigation */}
       <nav aria-label="Main navigation" className="flex-1 px-2 py-2 overflow-y-auto">

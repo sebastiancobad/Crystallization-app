@@ -138,8 +138,8 @@ export default function IntroPage() {
               Enter Platform
               <ArrowRight size={16} strokeWidth={2} />
             </Button>
-            <Button variant="secondary" size="lg" href="/showcase">
-              Design System
+            <Button variant="secondary" size="lg" href="/theory">
+              Explore Theory
             </Button>
           </motion.div>
 
@@ -296,8 +296,8 @@ function DashboardView({ onBack }: { onBack: () => void }) {
                   Start with Theory
                   <ArrowRight size={14} strokeWidth={2} />
                 </Button>
-                <Button variant="secondary" href="/showcase">
-                  Design System
+                <Button variant="secondary" href="/simulation">
+                  Run Simulation
                 </Button>
               </div>
             </div>
